@@ -1,13 +1,27 @@
+from pathlib import Path
+
+
 class Predictor:
     def __init__(self):
         self.model = None
 
-    def load_model(self, model):
-        """Attach a trained model to the predictor."""
-        self.model = model
-
     def predict(self, image_path: str):
-        """Run prediction using the loaded model."""
+        image = Path(image_path)
+
+        if not image.exists():
+            return {
+                "status": "error",
+                "message": "Image file does not exist",
+                "image_path": image_path,
+            }
+
+        if not image.is_file():
+            return {
+                "status": "error",
+                "message": "Image path is not a file",
+                "image_path": image_path,
+            }
+
         if self.model is None:
             return {
                 "status": "error",
