@@ -31,7 +31,6 @@ function TimelineSlider({ currentWeek, onWeekChange, isPlaying, setIsPlaying }) 
     <div className="timeline-container">
       <div className="timeline-header">
         <div className="timeline-title-group">
-          <span className="timeline-tag">Week 4 GIS Milestone</span>
           <h3>Multi-Temporal Crop Health Progression</h3>
         </div>
 

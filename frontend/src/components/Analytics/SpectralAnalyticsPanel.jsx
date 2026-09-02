@@ -26,7 +26,6 @@ function SpectralAnalyticsPanel({ currentWeek = 0 }) {
     <div id="analytics-panel" className="analytics-card">
       <div className="analytics-header">
         <div>
-          <span className="analytics-tag">Week 3 GIS Milestone</span>
           <h2>Acreage at Risk & Spectral Chemical Anomalies</h2>
           <p>3D-CNN & ViT 200+ Band Hyperspectral Chlorophyll Diagnostic</p>
         </div>
