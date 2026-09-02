@@ -166,11 +166,16 @@ async def predict(
 
 @router.get("/predictions")
 def get_predictions(
+    farm_id: str | None = None,
     db: Session = Depends(get_db)
 ):
+    query = db.query(Prediction)
+
+    if farm_id:
+        query = query.filter(Prediction.farm_id == farm_id)
 
     predictions = (
-        db.query(Prediction)
+        query
         .order_by(Prediction.created_at.desc())
         .all()
     )
