@@ -1,0 +1,17 @@
+# Spectral data
+ot/
+train_final.csv
+
+# Python cache
+__pycache__/
+*.pyc
+
+# Jupyter checkpoints
+.ipynb_checkpoints/
+
+# Virtual environments
+.venv/
+venv/
+env/
+
+ml/experiments/extratrees_day1/model.joblib

@@ -1,0 +1,97 @@
+{
+  "model": "Improved 3D-CNN + ViT Regression",
+  "architecture": "3D-CNN spectral-spatial extraction + ViT spatial tokens",
+  "device": "cpu",
+  "samples": 1990,
+  "train_samples": 1593,
+  "validation_samples": 397,
+  "spatial_size": 32,
+  "epochs_requested": 15,
+  "best_epoch": 3,
+  "best_mae": 25.43478850040688,
+  "best_rmse": 29.29588471700688,
+  "best_r2": -0.002476299378733282,
+  "target_original_scale": "0-100 percentage",
+  "target_training_scale": "0-1 normalized",
+  "metric_reporting_scale": "0-100 percentage",
+  "loss": "SmoothL1Loss",
+  "optimizer": "AdamW",
+  "learning_rate": 0.0002,
+  "weight_decay": 0.0001,
+  "seed": 42,
+  "parameters": 151849,
+  "history": [
+    {
+      "epoch": 1,
+      "train_loss": 0.23452737081821654,
+      "mae": 25.71121289275155,
+      "rmse": 29.84580748244937,
+      "r2": -0.040465164821930744,
+      "learning_rate": 0.0002,
+      "seconds": 95.58625400002347
+    },
+    {
+      "epoch": 2,
+      "train_loss": 0.23291438864748656,
+      "mae": 25.4978544109264,
+      "rmse": 29.45967241563268,
+      "r2": -0.013716941144684469,
+      "learning_rate": 0.0002,
+      "seconds": 82.38185359997442
+    },
+    {
+      "epoch": 3,
+      "train_loss": 0.2320603583340123,
+      "mae": 25.43478850040688,
+      "rmse": 29.29588471700688,
+      "r2": -0.002476299378733282,
+      "learning_rate": 0.0002,
+      "seconds": 84.7594981000293
+    },
+    {
+      "epoch": 4,
+      "train_loss": 0.2319610931928698,
+      "mae": 25.47322902218521,
+      "rmse": 29.466720070141303,
+      "r2": -0.014202023343877324,
+      "learning_rate": 0.0002,
+      "seconds": 106.1790142999962
+    },
+    {
+      "epoch": 5,
+      "train_loss": 0.2315225300226508,
+      "mae": 25.47699120880975,
+      "rmse": 29.459206991726315,
+      "r2": -0.013684910620714641,
+      "learning_rate": 0.0002,
+      "seconds": 81.09620439994615
+    },
+    {
+      "epoch": 6,
+      "train_loss": 0.2317789157680648,
+      "mae": 25.516315208048905,
+      "rmse": 29.53650619008711,
+      "r2": -0.019011587138951347,
+      "learning_rate": 0.0001,
+      "seconds": 86.53204889997141
+    },
+    {
+      "epoch": 7,
+      "train_loss": 0.23075666453406374,
+      "mae": 25.541992153343685,
+      "rmse": 29.56701539100077,
+      "r2": -0.021117813621817527,
+      "learning_rate": 0.0001,
+      "seconds": 82.12141020002309
+    },
+    {
+      "epoch": 8,
+      "train_loss": 0.23139164300737183,
+      "mae": 25.455467378537662,
+      "rmse": 29.408373428672224,
+      "r2": -0.010189585202313722,
+      "learning_rate": 0.0001,
+      "seconds": 78.43979139998555
+    }
+  ]
+}

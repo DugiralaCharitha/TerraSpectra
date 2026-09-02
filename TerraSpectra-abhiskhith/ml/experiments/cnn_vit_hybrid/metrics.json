@@ -1,0 +1,111 @@
+{
+  "configuration": {
+    "csv": "C:\\Users\\abhi\\Downloads\\beyond-visible-spectrum-ai-for-agriculture-2025\\train_final.csv",
+    "cubes_dir": "C:\\Users\\abhi\\Downloads\\beyond-visible-spectrum-ai-for-agriculture-2025\\ot\\ot",
+    "output_dir": "C:\\Users\\abhi\\Downloads\\beyond-visible-spectrum-ai-for-agriculture-2025\\ml\\experiments\\cnn_vit_hybrid",
+    "epochs": 10,
+    "batch_size": 8,
+    "spatial_size": 32,
+    "validation_fraction": 0.2,
+    "learning_rate": 0.0003,
+    "width": 8,
+    "embed_dim": 64,
+    "seed": 42,
+    "verify_only": false
+  },
+  "device": "cpu",
+  "valid_samples": 1990,
+  "num_classes": 101,
+  "history": [
+    {
+      "epoch": 1,
+      "train_loss": 4.786492008273885,
+      "train_accuracy": 0.015065913370998116,
+      "validation_loss": 4.61654349358316,
+      "validation_accuracy": 0.012594458438287154,
+      "learning_rate": 0.0003,
+      "seconds": 46.26327340002172
+    },
+    {
+      "epoch": 2,
+      "train_loss": 4.698263643675455,
+      "train_accuracy": 0.011927181418706842,
+      "validation_loss": 4.600969158432045,
+      "validation_accuracy": 0.012594458438287154,
+      "learning_rate": 0.0003,
+      "seconds": 55.19458660000237
+    },
+    {
+      "epoch": 3,
+      "train_loss": 4.708850100290379,
+      "train_accuracy": 0.007532956685499058,
+      "validation_loss": 4.59897630581027,
+      "validation_accuracy": 0.015113350125944584,
+      "learning_rate": 0.0003,
+      "seconds": 59.88020739998319
+    },
+    {
+      "epoch": 4,
+      "train_loss": 4.675818064343009,
+      "train_accuracy": 0.011299435028248588,
+      "validation_loss": 4.604590216571799,
+      "validation_accuracy": 0.015113350125944584,
+      "learning_rate": 0.0003,
+      "seconds": 624.2876968000201
+    },
+    {
+      "epoch": 5,
+      "train_loss": 4.679039988963767,
+      "train_accuracy": 0.01820464532328939,
+      "validation_loss": 4.603872162268805,
+      "validation_accuracy": 0.012594458438287154,
+      "learning_rate": 0.0003,
+      "seconds": 65.09722969998256
+    },
+    {
+      "epoch": 6,
+      "train_loss": 4.66397534566186,
+      "train_accuracy": 0.013182674199623353,
+      "validation_loss": 4.612102330781951,
+      "validation_accuracy": 0.010075566750629723,
+      "learning_rate": 0.00015,
+      "seconds": 66.15564920002362
+    },
+    {
+      "epoch": 7,
+      "train_loss": 4.635166930014879,
+      "train_accuracy": 0.013182674199623353,
+      "validation_loss": 4.610119627464929,
+      "validation_accuracy": 0.017632241813602016,
+      "learning_rate": 0.00015,
+      "seconds": 690.3056195999961
+    },
+    {
+      "epoch": 8,
+      "train_loss": 4.62133918404205,
+      "train_accuracy": 0.012554927809165096,
+      "validation_loss": 4.614648313306141,
+      "validation_accuracy": 0.012594458438287154,
+      "learning_rate": 0.00015,
+      "seconds": 48.79059730001609
+    },
+    {
+      "epoch": 9,
+      "train_loss": 4.618614050104269,
+      "train_accuracy": 0.01820464532328939,
+      "validation_loss": 4.6235920644226844,
+      "validation_accuracy": 0.007556675062972292,
+      "learning_rate": 7.5e-05,
+      "seconds": 57.34780980000505
+    },
+    {
+      "epoch": 10,
+      "train_loss": 4.6018442071913475,
+      "train_accuracy": 0.01694915254237288,
+      "validation_loss": 4.637574374825888,
+      "validation_accuracy": 0.012594458438287154,
+      "learning_rate": 7.5e-05,
+      "seconds": 56.58997729999828
+    }
+  ]
+}

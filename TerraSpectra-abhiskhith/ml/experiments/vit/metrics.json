@@ -1,0 +1,47 @@
+{
+  "configuration": {
+    "csv": "C:\\Users\\abhi\\Downloads\\beyond-visible-spectrum-ai-for-agriculture-2025\\train_final.csv",
+    "cubes_dir": "C:\\Users\\abhi\\Downloads\\beyond-visible-spectrum-ai-for-agriculture-2025\\ot\\ot",
+    "output_dir": "C:\\Users\\abhi\\Downloads\\beyond-visible-spectrum-ai-for-agriculture-2025\\ml\\experiments\\vit",
+    "epochs": 3,
+    "batch_size": 8,
+    "spatial_size": 32,
+    "patch_size": 8,
+    "embed_dim": 96,
+    "validation_fraction": 0.2,
+    "learning_rate": 0.0003,
+    "seed": 42,
+    "verify_only": false
+  },
+  "device": "cpu",
+  "valid_samples": 1990,
+  "history": [
+    {
+      "epoch": 1,
+      "train_loss": 4.72430272440602,
+      "train_accuracy": 0.008788449466415568,
+      "validation_loss": 4.613785334137885,
+      "validation_accuracy": 0.015113350125944584,
+      "learning_rate": 0.0003,
+      "seconds": 57.70960939999986
+    },
+    {
+      "epoch": 2,
+      "train_loss": 4.655529143745916,
+      "train_accuracy": 0.010671688637790333,
+      "validation_loss": 4.605843323003735,
+      "validation_accuracy": 0.015113350125944584,
+      "learning_rate": 0.0003,
+      "seconds": 77.3745501000003
+    },
+    {
+      "epoch": 3,
+      "train_loss": 4.642196119168384,
+      "train_accuracy": 0.011927181418706842,
+      "validation_loss": 4.600013509505342,
+      "validation_accuracy": 0.015113350125944584,
+      "learning_rate": 0.0003,
+      "seconds": 80.6553272000001
+    }
+  ]
+}

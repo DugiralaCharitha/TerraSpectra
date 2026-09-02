@@ -1,0 +1,10 @@
+REGRESSION BASELINE
+Samples: 1990
+Features: (1990, 125)
+Missing cubes: 0
+Target min: 0.0000
+Target max: 100.0000
+Target mean: 49.2588
+MAE: 23.7161
+RMSE: 27.6840
+R2: -0.000003

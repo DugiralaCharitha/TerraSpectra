@@ -1,0 +1,2 @@
+samples_loaded,missing_cubes,real_accuracy,permutation_mean_accuracy,permutation_std_accuracy,num_permutations,chance_accuracy,accuracy_difference
+1990,0,0.01256281407035176,0.013819095477386934,0.005056435124999525,10,0.009900990099009901,-0.0012562814070351744

@@ -1,0 +1,11 @@
+HYPERSPECTRAL AGRICULTURE — LABEL PERMUTATION TEST
+============================================================
+
+Samples loaded: 1990
+Missing cubes: 0
+
+Real-label accuracy: 1.256%
+Permutation mean accuracy: 1.382%
+Permutation std: 0.506%
+Chance accuracy: 0.990%
+Real - permutation difference: -0.126 percentage points
