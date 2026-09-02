@@ -2140,3 +2140,837 @@ body,
     font-size: 12px;
   }
 }
+
+
+/* =========================================================
+   GIS & GEOSPATIAL VISUALIZATION EXTENSIONS
+   ========================================================= */
+
+/* Header GIS pill & validation */
+.title-row {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  flex-wrap: wrap;
+}
+
+.header-gis-pill {
+  background: rgba(34, 197, 94, 0.2);
+  color: #86efac;
+  border: 1px solid rgba(74, 222, 128, 0.4);
+  padding: 3px 10px;
+  border-radius: 9999px;
+  font-size: 12px;
+  font-weight: 600;
+  letter-spacing: 0.5px;
+}
+
+.header-actions {
+  display: flex;
+  align-items: center;
+  gap: 16px;
+}
+
+.validation-status-tag {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  background: rgba(255, 255, 255, 0.12);
+  padding: 6px 12px;
+  border-radius: 20px;
+  font-size: 12px;
+  font-weight: 600;
+  color: #dcfce7;
+  border: 1px solid rgba(255, 255, 255, 0.2);
+}
+
+.green-circle {
+  width: 8px;
+  height: 8px;
+  background: #22c55e;
+  border-radius: 50%;
+  box-shadow: 0 0 8px #22c55e;
+}
+
+.card-header-flex {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
+  margin-bottom: 16px;
+  flex-wrap: wrap;
+  gap: 12px;
+}
+
+.card-subtitle {
+  font-size: 14px;
+  color: #6b7280;
+  margin-top: 2px;
+}
+
+.card-header-badge {
+  background: #f0fdf4;
+  border: 1px solid #bbf7d0;
+  padding: 6px 14px;
+  border-radius: 8px;
+  font-size: 13px;
+  color: #166534;
+}
+
+/* GIS Toolbar */
+.farm-map-wrapper {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+
+.gis-toolbar {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  background: #f8fafc;
+  padding: 10px 16px;
+  border-radius: 8px;
+  border: 1px solid #e2e8f0;
+  flex-wrap: wrap;
+  gap: 10px;
+}
+
+.gis-toolbar-left {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  flex-wrap: wrap;
+}
+
+.gis-badge {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  font-size: 12px;
+  color: #334155;
+  background: #ffffff;
+  padding: 4px 10px;
+  border-radius: 6px;
+  border: 1px solid #cbd5e1;
+}
+
+.gis-badge.accuracy {
+  background: #ecfdf5;
+  color: #065f46;
+  border-color: #a7f3d0;
+}
+
+.gis-badge.farm-size {
+  background: #eff6ff;
+  color: #1e40af;
+  border-color: #bfdbfe;
+}
+
+.live-dot {
+  width: 7px;
+  height: 7px;
+  border-radius: 50%;
+  background: #10b981;
+  animation: pulse-ring 2s infinite;
+}
+
+.gis-toolbar-right {
+  display: flex;
+  align-items: center;
+  gap: 14px;
+}
+
+.toggle-label {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  font-size: 13px;
+  color: #1e293b;
+  font-weight: 500;
+  cursor: pointer;
+}
+
+.toggle-label input[type="checkbox"] {
+  accent-color: #16a34a;
+  cursor: pointer;
+}
+
+/* Camera Navigation Overlay Controls */
+.gis-camera-controls {
+  position: absolute;
+  top: 14px;
+  left: 60px;
+  z-index: 1000;
+  display: flex;
+  gap: 8px;
+}
+
+.gis-ctrl-btn {
+  background: white;
+  border: 1px solid #cbd5e1;
+  padding: 8px 14px;
+  border-radius: 6px;
+  font-size: 12px;
+  font-weight: 600;
+  color: #1e293b;
+  cursor: pointer;
+  box-shadow: 0 2px 6px rgba(0,0,0,0.12);
+  transition: all 0.2s ease;
+}
+
+.gis-ctrl-btn:hover {
+  background: #f1f5f9;
+  border-color: #94a3b8;
+}
+
+.gis-ctrl-btn.focus-hotspot {
+  background: #fef2f2;
+  border-color: #fca5a5;
+  color: #b91c1c;
+}
+
+.gis-ctrl-btn.focus-hotspot:hover {
+  background: #fee2e2;
+}
+
+/* Custom Pulsing Outbreak Marker */
+.custom-outbreak-marker {
+  position: relative;
+}
+
+.pulse-marker-ring {
+  position: absolute;
+  width: 32px;
+  height: 32px;
+  border-radius: 50%;
+  border: 2px solid #ef4444;
+  top: 2px;
+  left: 2px;
+  animation: marker-pulse 1.8s infinite;
+}
+
+.pulse-marker-center {
+  width: 36px;
+  height: 36px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 18px;
+  background: white;
+  border: 2px solid #dc2626;
+  border-radius: 50%;
+  box-shadow: 0 0 10px rgba(220, 38, 38, 0.4);
+}
+
+@keyframes marker-pulse {
+  0% {
+    transform: scale(0.8);
+    opacity: 0.9;
+  }
+  70% {
+    transform: scale(2.2);
+    opacity: 0;
+  }
+  100% {
+    transform: scale(2.4);
+    opacity: 0;
+  }
+}
+
+@keyframes pulse-ring {
+  0% { transform: scale(0.95); box-shadow: 0 0 0 0 rgba(16, 185, 129, 0.7); }
+  70% { transform: scale(1); box-shadow: 0 0 0 6px rgba(16, 185, 129, 0); }
+  100% { transform: scale(0.95); box-shadow: 0 0 0 0 rgba(16, 185, 129, 0); }
+}
+
+/* Legend Header & Validation */
+.legend-header {
+  border-bottom: 1px solid #e5e7eb;
+  padding-bottom: 6px;
+  margin-bottom: 8px;
+}
+
+.legend-validation-badge {
+  display: inline-block;
+  font-size: 10px;
+  color: #059669;
+  font-weight: 700;
+  background: #ecfdf5;
+  padding: 2px 6px;
+  border-radius: 4px;
+  margin-top: 4px;
+}
+
+.legend-footer {
+  margin-top: 8px;
+  padding-top: 6px;
+  border-top: 1px solid #e5e7eb;
+  color: #64748b;
+}
+
+/* =========================================================
+   TIMELINE PROGRESSION SLIDER (WEEK 4 MILESTONE)
+   ========================================================= */
+
+.timeline-container {
+  background: #ffffff;
+  border: 1px solid #e2e8f0;
+  border-radius: 10px;
+  padding: 16px 20px;
+  margin-top: 10px;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.04);
+}
+
+.timeline-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 16px;
+}
+
+.timeline-tag {
+  font-size: 11px;
+  font-weight: 700;
+  text-transform: uppercase;
+  color: #0284c7;
+  background: #e0f2fe;
+  padding: 2px 8px;
+  border-radius: 4px;
+  letter-spacing: 0.5px;
+}
+
+.timeline-title-group h3 {
+  font-size: 16px;
+  color: #1e293b;
+  margin-top: 4px;
+}
+
+.timeline-play-btn {
+  background: #166534;
+  color: white;
+  border: none;
+  padding: 8px 16px;
+  border-radius: 6px;
+  font-weight: 600;
+  font-size: 13px;
+  cursor: pointer;
+  transition: all 0.2s ease;
+}
+
+.timeline-play-btn:hover {
+  background: #14532d;
+}
+
+.timeline-play-btn.playing {
+  background: #dc2626;
+}
+
+.timeline-track-wrapper {
+  position: relative;
+  padding: 20px 10px 10px 10px;
+}
+
+.timeline-track {
+  position: relative;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  height: 6px;
+  background: #e2e8f0;
+  border-radius: 3px;
+}
+
+.timeline-track-fill {
+  position: absolute;
+  top: 0;
+  left: 0;
+  height: 100%;
+  background: linear-gradient(90deg, #22c55e, #f97316, #ef4444);
+  border-radius: 3px;
+  transition: width 0.3s ease;
+  z-index: 1;
+}
+
+.timeline-node {
+  position: relative;
+  z-index: 2;
+  background: none;
+  border: none;
+  cursor: pointer;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  outline: none;
+}
+
+.node-dot {
+  width: 18px;
+  height: 18px;
+  border-radius: 50%;
+  border: 3px solid white;
+  box-shadow: 0 0 0 2px #cbd5e1;
+  transition: all 0.2s ease;
+}
+
+.timeline-node.active .node-dot {
+  transform: scale(1.35);
+  box-shadow: 0 0 0 3px #1e293b;
+}
+
+.timeline-node.today .node-dot {
+  border-color: #fef08a;
+  box-shadow: 0 0 0 3px #ef4444;
+}
+
+.node-label {
+  font-size: 12px;
+  font-weight: 600;
+  color: #475569;
+  margin-top: 8px;
+  white-space: nowrap;
+}
+
+.timeline-node.active .node-label {
+  color: #0f172a;
+  font-weight: 700;
+}
+
+.node-date {
+  font-size: 10px;
+  color: #94a3b8;
+  white-space: nowrap;
+}
+
+/* Timeline Active Card Details */
+.timeline-details-card {
+  margin-top: 18px;
+  background: #f8fafc;
+  border-radius: 8px;
+  padding: 14px 18px;
+  border: 1px solid #e2e8f0;
+}
+
+.detail-status-pill {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  padding: 4px 12px;
+  border-radius: 20px;
+  font-size: 13px;
+  border: 1px solid;
+  margin-bottom: 10px;
+}
+
+.pulsing-indicator {
+  width: 8px;
+  height: 8px;
+  border-radius: 50%;
+}
+
+.detail-metrics {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
+  gap: 12px;
+  margin: 10px 0;
+}
+
+.detail-item {
+  background: white;
+  padding: 8px 12px;
+  border-radius: 6px;
+  border: 1px solid #edf2f7;
+  display: flex;
+  flex-direction: column;
+}
+
+.detail-item span {
+  font-size: 11px;
+  color: #64748b;
+  margin-bottom: 2px;
+}
+
+.detail-item strong {
+  font-size: 14px;
+  color: #1e293b;
+}
+
+.detail-desc {
+  font-size: 13px;
+  color: #475569;
+  line-height: 1.5;
+  margin-top: 8px;
+}
+
+.status-green { color: #16a34a !important; }
+.status-danger { color: #dc2626 !important; }
+
+/* =========================================================
+   SPECTRAL ANALYTICS PANEL (WEEK 3 MILESTONE)
+   ========================================================= */
+
+.analytics-card {
+  background: white;
+  border-radius: 12px;
+  padding: 24px;
+  box-shadow: 0 4px 16px rgba(0, 0, 0, 0.08);
+  margin-top: 24px;
+}
+
+.analytics-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
+  margin-bottom: 20px;
+  flex-wrap: wrap;
+  gap: 14px;
+}
+
+.analytics-tag {
+  font-size: 11px;
+  font-weight: 700;
+  text-transform: uppercase;
+  color: #7c3aed;
+  background: #f5f3ff;
+  padding: 2px 8px;
+  border-radius: 4px;
+}
+
+.analytics-header h2 {
+  font-size: 24px;
+  color: #1f2937;
+  margin: 4px 0 2px 0;
+}
+
+.analytics-header p {
+  font-size: 14px;
+  color: #6b7280;
+}
+
+.lead-time-badge {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  background: #fef2f2;
+  border: 1px solid #fecaca;
+  padding: 8px 14px;
+  border-radius: 8px;
+}
+
+.badge-icon {
+  font-size: 20px;
+}
+
+.lead-time-badge strong {
+  display: block;
+  font-size: 14px;
+  color: #b91c1c;
+}
+
+.lead-time-badge span {
+  font-size: 11px;
+  color: #dc2626;
+}
+
+/* Acreage Summary Grid */
+.acreage-summary-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+  gap: 16px;
+  margin-bottom: 16px;
+}
+
+.acreage-stat {
+  background: #f8fafc;
+  padding: 16px;
+  border-radius: 10px;
+  border: 1px solid #e2e8f0;
+  display: flex;
+  flex-direction: column;
+}
+
+.acreage-stat.critical {
+  background: #fff5f5;
+  border-color: #fed7d7;
+}
+
+.acreage-stat.moderate {
+  background: #fffbeb;
+  border-color: #fef3c7;
+}
+
+.acreage-stat.healthy {
+  background: #f0fdf4;
+  border-color: #bbf7d0;
+}
+
+.stat-label {
+  font-size: 12px;
+  color: #64748b;
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+}
+
+.stat-value {
+  font-size: 28px;
+  font-weight: 800;
+  color: #0f172a;
+  margin: 4px 0;
+}
+
+.acreage-stat.critical .stat-value {
+  color: #dc2626;
+}
+
+.stat-unit {
+  font-size: 12px;
+  color: #64748b;
+}
+
+.stat-alert {
+  margin-top: 6px;
+  font-size: 11px;
+  font-weight: 700;
+  color: #b91c1c;
+  background: #fee2e2;
+  padding: 2px 6px;
+  border-radius: 4px;
+  width: fit-content;
+}
+
+/* Proportional Acreage Bar */
+.acreage-bar-wrapper {
+  margin: 16px 0 24px 0;
+}
+
+.acreage-bar {
+  display: flex;
+  height: 14px;
+  background: #e2e8f0;
+  border-radius: 7px;
+  overflow: hidden;
+}
+
+.bar-critical { background: #ef4444; min-width: 4px; }
+.bar-moderate { background: #f59e0b; }
+.bar-healthy { background: #22c55e; }
+
+.acreage-savings-callout {
+  display: flex;
+  align-items: flex-start;
+  gap: 10px;
+  background: #ecfdf5;
+  border: 1px solid #a7f3d0;
+  border-radius: 8px;
+  padding: 12px 16px;
+  margin-top: 12px;
+  font-size: 13px;
+  color: #065f46;
+  line-height: 1.5;
+}
+
+.savings-icon {
+  font-size: 18px;
+}
+
+/* Chemical Anomalies Section */
+.chemical-anomalies-section {
+  margin-top: 24px;
+}
+
+.chemical-anomalies-section h3 {
+  font-size: 18px;
+  color: #1e293b;
+  margin-bottom: 14px;
+}
+
+.chemical-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+  gap: 16px;
+}
+
+.chemical-card {
+  background: #f8fafc;
+  border-radius: 8px;
+  padding: 16px;
+  border: 1px solid #e2e8f0;
+  border-left: 4px solid;
+}
+
+.chemical-card.alert { border-left-color: #ef4444; background: #fef2f2; }
+.chemical-card.warning { border-left-color: #f59e0b; background: #fffbeb; }
+.chemical-card.info { border-left-color: #3b82f6; background: #eff6ff; }
+.chemical-card.secondary { border-left-color: #8b5cf6; background: #f5f3ff; }
+
+.chemical-card-header {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  margin-bottom: 8px;
+}
+
+.chem-icon {
+  font-size: 18px;
+}
+
+.chemical-card-header h4 {
+  font-size: 14px;
+  font-weight: 700;
+  color: #1e293b;
+}
+
+.chem-stat-row {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 8px;
+}
+
+.chem-delta {
+  font-size: 20px;
+  font-weight: 800;
+  color: #0f172a;
+}
+
+.chemical-card.alert .chem-delta { color: #dc2626; }
+.chemical-card.warning .chem-delta { color: #d97706; }
+.chemical-card.info .chem-delta { color: #2563eb; }
+.chemical-card.secondary .chem-delta { color: #7c3aed; }
+
+.chem-band {
+  font-size: 11px;
+  font-weight: 600;
+  color: #64748b;
+  background: white;
+  padding: 2px 6px;
+  border-radius: 4px;
+  border: 1px solid #cbd5e1;
+}
+
+.chemical-card p {
+  font-size: 12px;
+  color: #475569;
+  line-height: 1.4;
+}
+
+/* Spectral Curve Section */
+.spectral-curve-section {
+  margin-top: 28px;
+  background: #f8fafc;
+  border: 1px solid #e2e8f0;
+  border-radius: 10px;
+  padding: 18px 20px;
+}
+
+.spectral-curve-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
+  margin-bottom: 12px;
+  flex-wrap: wrap;
+  gap: 10px;
+}
+
+.spectral-curve-header h3 {
+  font-size: 16px;
+  color: #1e293b;
+}
+
+.spectral-curve-header p {
+  font-size: 12px;
+  color: #64748b;
+}
+
+.spectral-legend {
+  display: flex;
+  gap: 14px;
+  font-size: 12px;
+  font-weight: 500;
+  color: #334155;
+  flex-wrap: wrap;
+}
+
+.spectral-legend .dot {
+  display: inline-block;
+  width: 10px;
+  height: 10px;
+  border-radius: 50%;
+  margin-right: 4px;
+}
+
+.legend-healthy .dot { background: #22c55e; }
+.legend-infected .dot { background: #ef4444; }
+.legend-critical-band .dot { background: #fca5a5; }
+
+.svg-chart-container {
+  width: 100%;
+  overflow-x: auto;
+}
+
+.spectral-svg {
+  width: 100%;
+  max-width: 800px;
+  height: auto;
+  display: block;
+  margin: 0 auto;
+}
+
+.spectral-note {
+  margin-top: 12px;
+  font-size: 12px;
+  color: #475569;
+  background: #ffffff;
+  padding: 10px 14px;
+  border-radius: 6px;
+  border: 1px solid #e2e8f0;
+  line-height: 1.5;
+}
+
+/* Status colors */
+.status-critical { color: #dc2626 !important; }
+.status-warning { color: #d97706 !important; }
+.status-lead { color: #7c3aed !important; }
+
+/* Critical Alert styling */
+.alert-critical {
+  border-left: 4px solid #ef4444;
+  background: #fef2f2 !important;
+}
+
+.alert-title-row {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  flex-wrap: wrap;
+  gap: 8px;
+  margin-bottom: 6px;
+}
+
+.alert-urgent-tag {
+  font-size: 11px;
+  font-weight: 800;
+  background: #dc2626;
+  color: white;
+  padding: 2px 8px;
+  border-radius: 4px;
+  letter-spacing: 0.5px;
+}
+
+.alert-meta-row {
+  display: flex;
+  gap: 12px;
+  margin-top: 8px;
+  flex-wrap: wrap;
+  align-items: center;
+}
+
+.alert-meta-tag {
+  font-size: 11px;
+  background: white;
+  border: 1px solid #fecaca;
+  color: #991b1b;
+  padding: 2px 8px;
+  border-radius: 4px;
+  font-weight: 600;
+}

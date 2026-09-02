@@ -1,0 +1,212 @@
+{
+  "type": "FeatureCollection",
+  "name": "TerraSpectra_1000Acre_WadgaonFarm",
+  "crs": {
+    "type": "name",
+    "properties": {
+      "name": "urn:ogc:def:crs:OGC:1.3:CRS84"
+    }
+  },
+  "metadata": {
+    "farm_id": "TS-IN-MH-042",
+    "farm_name": "Wadgaon Agricultural Research & Monitoring Site",
+    "location": "Wadgaon, Maharashtra, India",
+    "total_acreage": 1000.14,
+    "total_hectares": 404.74,
+    "center_coordinates": [76.6061, 20.7505],
+    "bounding_box": [76.59643, 20.74145, 76.61577, 20.75955],
+    "crop_type": "Wheat (Triticum aestivum)",
+    "soil_classification": "Deep Vertisol (Black Cotton Soil)",
+    "monitoring_instrument": "NASA Hyperion / ESA Sentinel-2 / Airborne 200+ Band Sensor"
+  },
+  "features": [
+    {
+      "type": "Feature",
+      "id": "farm_outer_boundary",
+      "properties": {
+        "name": "Wadgaon Farm Outer Perimeter",
+        "area_acres": 1000.14,
+        "type": "Perimeter",
+        "stroke": "#163a24",
+        "stroke_width": 3,
+        "fill": "#2d6a4f",
+        "fill_opacity": 0.08
+      },
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [76.59643, 20.74145],
+            [76.59643, 20.75955],
+            [76.61577, 20.75955],
+            [76.61577, 20.74145],
+            [76.59643, 20.74145]
+          ]
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "id": "parcel_A",
+      "properties": {
+        "parcel_id": "P-A",
+        "name": "Northwest Field (Parcel A)",
+        "area_acres": 166.69,
+        "crop_variety": "Sharbati High-Protein Wheat",
+        "planting_date": "2026-05-10",
+        "irrigation_type": "Precision Center-Pivot",
+        "baseline_ndvi": 0.74,
+        "current_status": "Optimal Vegetative",
+        "risk_level": "Low"
+      },
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [76.59643, 20.75050],
+            [76.59643, 20.75955],
+            [76.60288, 20.75955],
+            [76.60288, 20.75050],
+            [76.59643, 20.75050]
+          ]
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "id": "parcel_B",
+      "properties": {
+        "parcel_id": "P-B",
+        "name": "North-Central Field (Parcel B)",
+        "area_acres": 166.69,
+        "crop_variety": "Lokwan Durum Wheat",
+        "planting_date": "2026-05-12",
+        "irrigation_type": "Drip Fertigation",
+        "baseline_ndvi": 0.71,
+        "current_status": "Healthy Canopy",
+        "risk_level": "Low"
+      },
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [76.60288, 20.75050],
+            [76.60288, 20.75955],
+            [76.60932, 20.75955],
+            [76.60932, 20.75050],
+            [76.60288, 20.75050]
+          ]
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "id": "parcel_C",
+      "properties": {
+        "parcel_id": "P-C",
+        "name": "Northeast Field (Parcel C)",
+        "area_acres": 166.69,
+        "crop_variety": "Kalyansona Bread Wheat",
+        "planting_date": "2026-05-08",
+        "irrigation_type": "Precision Lateral Move",
+        "baseline_ndvi": 0.68,
+        "current_status": "Early Chemical Stress Detected",
+        "risk_level": "Critical",
+        "warning": "5.2-Acre Fungal Blight Hotspot Identified"
+      },
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [76.60932, 20.75050],
+            [76.60932, 20.75955],
+            [76.61577, 20.75955],
+            [76.61577, 20.75050],
+            [76.60932, 20.75050]
+          ]
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "id": "parcel_D",
+      "properties": {
+        "parcel_id": "P-D",
+        "name": "Southwest Field (Parcel D)",
+        "area_acres": 166.69,
+        "crop_variety": "Sharbati High-Protein Wheat",
+        "planting_date": "2026-05-15",
+        "irrigation_type": "Subsurface Drip",
+        "baseline_ndvi": 0.76,
+        "current_status": "Vigorous Growth",
+        "risk_level": "Low"
+      },
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [76.59643, 20.74145],
+            [76.59643, 20.75050],
+            [76.60288, 20.75050],
+            [76.60288, 20.74145],
+            [76.59643, 20.74145]
+          ]
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "id": "parcel_E",
+      "properties": {
+        "parcel_id": "P-E",
+        "name": "South-Central Field (Parcel E)",
+        "area_acres": 166.69,
+        "crop_variety": "Lokwan Durum Wheat",
+        "planting_date": "2026-05-14",
+        "irrigation_type": "Variable Rate Sprinkler",
+        "baseline_ndvi": 0.73,
+        "current_status": "Healthy Canopy",
+        "risk_level": "Low"
+      },
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [76.60288, 20.74145],
+            [76.60288, 20.75050],
+            [76.60932, 20.75050],
+            [76.60932, 20.74145],
+            [76.60288, 20.74145]
+          ]
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "id": "parcel_F",
+      "properties": {
+        "parcel_id": "P-F",
+        "name": "Southeast Field (Parcel F)",
+        "area_acres": 166.69,
+        "crop_variety": "HD-2967 High Yield Wheat",
+        "planting_date": "2026-05-11",
+        "irrigation_type": "Precision Drip",
+        "baseline_ndvi": 0.75,
+        "current_status": "Healthy Canopy",
+        "risk_level": "Low"
+      },
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [76.60932, 20.74145],
+            [76.60932, 20.75050],
+            [76.61577, 20.75050],
+            [76.61577, 20.74145],
+            [76.60932, 20.74145]
+          ]
+        ]
+      }
+    }
+  ]
+}
