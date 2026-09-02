@@ -17,3 +17,7 @@ Thumbs.db
 *.swp
 *.swo
 *~
+backend/uploads/*
+model_3dcnn_temp.py
+*t_3dcnn.pt*
+backend/terraspectra.db
