@@ -1,12 +1,9 @@
 import os
 import uuid
 
-from fastapi import APIRouter, UploadFile, File, HTTPException, Depends
-from sqlalchemy.orm import Session
+from fastapi import APIRouter, UploadFile, File, HTTPException
 
 from app.services.prediction_service import predict_image
-from app.database import get_db
-from app.models.prediction import Prediction
 
 
 router = APIRouter()
@@ -70,7 +67,6 @@ async def upload(file: UploadFile = File(...)):
     )
 
     try:
-
         contents = await file.read()
 
         if not contents:
@@ -89,7 +85,6 @@ async def upload(file: UploadFile = File(...)):
         raise
 
     except Exception as exc:
-
         raise HTTPException(
             status_code=500,
             detail=f"Unable to save file: {str(exc)}"
@@ -103,11 +98,7 @@ async def upload(file: UploadFile = File(...)):
 
 
 @router.post("/predict")
-async def predict(
-    image_path: str,
-    farm_id: str | None = None,
-    db: Session = Depends(get_db)
-):
+async def predict(image_path: str, farm_id: str | None = None):
 
     if not image_path:
         raise HTTPException(
@@ -122,86 +113,30 @@ async def predict(
         )
 
     try:
-
         result = predict_image(
             image_path
         )
 
-        prediction_record = Prediction(
-            farm_id=farm_id,
-            filename=os.path.basename(image_path),
-            prediction=result.get(
-                "prediction",
-                result.get("class_name", "Unknown")
-            ),
-            confidence=float(
-                result.get("confidence", 0)
-            ),
-            stress_probability=float(
-                result.get("stress_probability", 0)
-            ),
-            tiles_processed=int(
-                result.get("tiles_processed", 0)
-            )
-        )
-
-        db.add(prediction_record)
-        db.commit()
-        db.refresh(prediction_record)
-
-        result["prediction_id"] = prediction_record.id
-        result["saved"] = True
+        if farm_id:
+            result["farm_id"] = farm_id
 
         return result
 
     except Exception as exc:
-
-        db.rollback()
-
         raise HTTPException(
             status_code=500,
             detail=f"Prediction failed: {str(exc)}"
         )
 
 
-@router.get("/predictions")
-def get_predictions(
-    farm_id: str | None = None,
-    db: Session = Depends(get_db)
-):
-    query = db.query(Prediction)
-
-    if farm_id:
-        query = query.filter(Prediction.farm_id == farm_id)
-
-    predictions = (
-        query
-        .order_by(Prediction.created_at.desc())
-        .all()
-    )
-
-    return predictions
-
-
 @router.get("/results/{id}")
-async def get_result(
-    id: int,
-    db: Session = Depends(get_db)
-):
+async def get_result(id: int):
 
-    prediction = (
-        db.query(Prediction)
-        .filter(Prediction.id == id)
-        .first()
-    )
-
-    if not prediction:
-        raise HTTPException(
-            status_code=404,
-            detail="Prediction not found."
-        )
-
-    return prediction
+    return {
+        "id": id,
+        "status": "success",
+        "message": "Result endpoint working"
+    }
 
 
 @router.delete("/image/{id}")
