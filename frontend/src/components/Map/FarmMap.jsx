@@ -19,6 +19,7 @@ import {
 import TimelineSlider from './TimelineSlider'
 
 // Fix Leaflet marker icon
+
 delete L.Icon.Default.prototype._getIconUrl
 L.Icon.Default.mergeOptions({
   iconRetinaUrl:
@@ -28,7 +29,22 @@ L.Icon.Default.mergeOptions({
   shadowUrl:
     'https://cdnjs.cloudflare.com/ajax/libs/leaflet/1.9.4/images/marker-shadow.png'
 })
+try {
+  if (L && L.Icon && L.Icon.Default) {
+    delete L.Icon.Default.prototype._getIconUrl
 
+    L.Icon.Default.mergeOptions({
+      iconRetinaUrl:
+        'https://cdnjs.cloudflare.com/ajax/libs/leaflet/1.9.4/images/marker-icon-2x.png',
+      iconUrl:
+        'https://cdnjs.cloudflare.com/ajax/libs/leaflet/1.9.4/images/marker-icon.png',
+      shadowUrl:
+        'https://cdnjs.cloudflare.com/ajax/libs/leaflet/1.9.4/images/marker-shadow.png'
+    })
+  }
+} catch (err) {
+  console.warn('Leaflet icon config error:', err)
+}
 // Custom red warning icon for the 5-acre fungal outbreak epicenter
 const outbreakIcon = new L.DivIcon({
   className: 'custom-outbreak-marker',

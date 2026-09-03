@@ -6,7 +6,11 @@ function App() {
   const [isLoggedIn, setIsLoggedIn] = useState(false)
 
   if (!isLoggedIn) {
-    return <Login onLogin={() => setIsLoggedIn(true)} />
+    return (
+      <Login
+        onLogin={() => setIsLoggedIn(true)}
+      />
+    )
   }
 
   return (
