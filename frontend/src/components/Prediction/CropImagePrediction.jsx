@@ -1,7 +1,20 @@
 import { useState, useRef } from 'react'
 import '../../styles/CropImagePrediction.css'
 
-const API_BASE_URL = 'http://localhost:8000'
+const API_BASE_URLS = ['http://localhost:8001', 'http://localhost:8000', 'http://127.0.0.1:8001', 'http://127.0.0.1:8000']
+
+async function apiFetch(path, options) {
+  let lastErr = null
+  for (const base of API_BASE_URLS) {
+    try {
+      const res = await fetch(`${base}${path}`, options)
+      return { res, base }
+    } catch (err) {
+      lastErr = err
+    }
+  }
+  throw lastErr || new Error('Backend server is not reachable on ports 8000 or 8001.')
+}
 
 function CropImagePrediction({ farmId = null, farmName = null }) {
   const [selectedFile, setSelectedFile] = useState(null)
@@ -129,7 +142,7 @@ function CropImagePrediction({ farmId = null, farmName = null }) {
       const formData = new FormData()
       formData.append('file', selectedFile)
 
-      const uploadRes = await fetch(`${API_BASE_URL}/upload`, {
+      const { res: uploadRes } = await apiFetch('/upload', {
         method: 'POST',
         body: formData
       })
@@ -163,12 +176,12 @@ function CropImagePrediction({ farmId = null, farmName = null }) {
       // Step 2: Call /predict with image_path and optional farm_id
       setUploadPhase('Running 3D-CNN hyperspectral prediction...')
 
-      let predictUrl = `${API_BASE_URL}/predict?image_path=${encodeURIComponent(imagePath)}`
+      let predictPath = `/predict?image_path=${encodeURIComponent(imagePath)}`
       if (farmId) {
-        predictUrl += `&farm_id=${encodeURIComponent(farmId)}`
+        predictPath += `&farm_id=${encodeURIComponent(farmId)}`
       }
 
-      const predictRes = await fetch(predictUrl, {
+      const { res: predictRes } = await apiFetch(predictPath, {
         method: 'POST'
       })
 
@@ -194,7 +207,7 @@ function CropImagePrediction({ farmId = null, farmName = null }) {
       console.error('Prediction workflow error:', err)
       setError({
         title: 'Analysis Could Not Be Completed',
-        message: err?.message || 'Unable to connect to the TerraSpectra prediction service. Please ensure the backend is running and try again.'
+        message: err?.message || 'Unable to connect to the TerraSpectra prediction service. Please ensure the backend is running on port 8000 or 8001.'
       })
       setUploadPhase('')
     } finally {
