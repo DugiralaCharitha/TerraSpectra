@@ -1,5 +1,4 @@
 import { useState } from 'react'
-
 import {
   MapContainer,
   TileLayer,
@@ -7,14 +6,29 @@ import {
   Polygon,
   Popup,
   LayersControl,
-  Circle,
   useMap
 } from 'react-leaflet'
-
 import 'leaflet/dist/leaflet.css'
 import L from 'leaflet'
 
+import {
+  FARM_METADATA,
+  DISEASE_HOTSPOT,
+  generateTimelineGrid
+} from '../../services/gisService'
+import TimelineSlider from './TimelineSlider'
+
 // Fix Leaflet marker icon
+
+delete L.Icon.Default.prototype._getIconUrl
+L.Icon.Default.mergeOptions({
+  iconRetinaUrl:
+    'https://cdnjs.cloudflare.com/ajax/libs/leaflet/1.9.4/images/marker-icon-2x.png',
+  iconUrl:
+    'https://cdnjs.cloudflare.com/ajax/libs/leaflet/1.9.4/images/marker-icon.png',
+  shadowUrl:
+    'https://cdnjs.cloudflare.com/ajax/libs/leaflet/1.9.4/images/marker-shadow.png'
+})
 try {
   if (L && L.Icon && L.Icon.Default) {
     delete L.Icon.Default.prototype._getIconUrl
@@ -31,224 +45,324 @@ try {
 } catch (err) {
   console.warn('Leaflet icon config error:', err)
 }
+// Custom red warning icon for the 5-acre fungal outbreak epicenter
+const outbreakIcon = new L.DivIcon({
+  className: 'custom-outbreak-marker',
+  html: '<div class="pulse-marker-ring"></div><div class="pulse-marker-center">⚠️</div>',
+  iconSize: [36, 36],
+  iconAnchor: [18, 18]
+})
 
-// Farm location
-const farmPosition = [20.7505, 76.6061]
-
-// Farm boundary
-const farmBoundary = [
-  [20.7512, 76.6055],
-  [20.7515, 76.6070],
-  [20.7498, 76.6074],
-  [20.7495, 76.6058]
-]
-
-// Mock crop-health data
-const heatmapData = [
-  { position: [20.7510, 76.6058], severity: 0.2 },
-  { position: [20.7510, 76.6063], severity: 0.4 },
-  { position: [20.7510, 76.6068], severity: 0.7 },
-  { position: [20.7510, 76.6072], severity: 0.9 },
-
-  { position: [20.7505, 76.6058], severity: 0.3 },
-  { position: [20.7505, 76.6063], severity: 0.5 },
-  { position: [20.7505, 76.6068], severity: 0.8 },
-  { position: [20.7505, 76.6072], severity: 0.6 },
-
-  { position: [20.7500, 76.6058], severity: 0.1 },
-  { position: [20.7500, 76.6063], severity: 0.3 },
-  { position: [20.7500, 76.6068], severity: 0.6 },
-  { position: [20.7500, 76.6072], severity: 0.8 },
-
-  { position: [20.7497, 76.6060], severity: 0.2 },
-  { position: [20.7497, 76.6065], severity: 0.4 },
-  { position: [20.7497, 76.6070], severity: 0.7 }
-]
-
-// Convert severity to color
-function getHeatmapColor(severity) {
-  if (severity < 0.3) {
-    return 'green'
-  }
-
-  if (severity < 0.5) {
-    return 'yellow'
-  }
-
-  if (severity < 0.7) {
-    return 'orange'
-  }
-
-  return 'red'
-}
-
-// Center Farm button
-function CenterFarmButton() {
+// Camera navigation controls
+function MapNavigationControls({ centerCoords, hotspotCoords }) {
   const map = useMap()
 
-  const centerFarm = () => {
-    map.setView(farmPosition, 15)
-  }
-
   return (
-    <div className="center-farm-control">
-      <button onClick={centerFarm}>
-        📍 Center Farm
+    <div className="gis-camera-controls">
+      <button
+        className="gis-ctrl-btn"
+        onClick={() => map.setView(centerCoords, 14)}
+        title="Center view on 1,000-acre farm"
+      >
+        📍 Center Farm (1,000 Ac)
+      </button>
+
+      <button
+        className="gis-ctrl-btn focus-hotspot"
+        onClick={() => map.setView(hotspotCoords, 16)}
+        title="Zoom directly into the 5.2-acre fungal blight outbreak zone"
+      >
+        🎯 Focus 5.2-Ac Outbreak Zone
       </button>
     </div>
   )
 }
 
-// Heatmap toggle
-function HeatmapToggle({ showHeatmap, setShowHeatmap }) {
-  return (
-    <div className="heatmap-toggle">
-      <button onClick={() => setShowHeatmap(!showHeatmap)}>
-        {showHeatmap ? 'Hide Heatmap' : 'Show Heatmap'}
-      </button>
-    </div>
-  )
-}
-
-// Crop health legend
-function HeatmapLegend() {
+// Interactive crop health legend
+function HeatmapLegend({ currentWeek }) {
   return (
     <div className="heatmap-legend">
-      <h4>Crop Health</h4>
+      <div className="legend-header">
+        <h4>Crop Spectral Health</h4>
+        <span className="legend-validation-badge">✅ GIS Validated</span>
+      </div>
 
       <div className="legend-item">
         <span className="legend-color legend-green"></span>
-        <span>Low Stress</span>
+        <span>Optimal Canopy (NDVI &gt; 0.70)</span>
       </div>
 
       <div className="legend-item">
         <span className="legend-color legend-yellow"></span>
-        <span>Moderate Stress</span>
+        <span>Sub-Visual Stress (NDVI 0.55-0.70)</span>
       </div>
 
       <div className="legend-item">
         <span className="legend-color legend-orange"></span>
-        <span>Elevated Stress</span>
+        <span>Elevated Pathogen Risk (NDVI 0.40-0.55)</span>
       </div>
 
       <div className="legend-item">
         <span className="legend-color legend-red"></span>
-        <span>High Stress</span>
+        <span>Critical Outbreak (NDVI &lt; 0.40)</span>
+      </div>
+
+      <div className="legend-footer">
+        <small>Timeline Stage: Week {currentWeek >= 0 ? `+${currentWeek}` : currentWeek}</small>
       </div>
     </div>
   )
 }
 
-// Heatmap circles
-function CropHealthHeatmap() {
-  return (
-    <>
-      {heatmapData.map((cell, index) => {
-        const color = getHeatmapColor(cell.severity)
+function FarmMap({ currentWeek = 0, onWeekChange }) {
+  const [internalWeek, setInternalWeek] = useState(0)
+  const [isPlaying, setIsPlaying] = useState(false)
 
-        return (
-          <Circle
-            key={index}
-            center={cell.position}
-            radius={45}
+  // Layer visibility toggles
+  const [showHeatmap, setShowHeatmap] = useState(true)
+  const [showParcels, setShowParcels] = useState(true)
+  const [showHotspot, setShowHotspot] = useState(true)
+
+  const activeWeek = onWeekChange !== undefined ? currentWeek : internalWeek
+  const handleWeekChange = onWeekChange || setInternalWeek
+
+  // Dynamically generate georeferenced grid for active timeline week
+  const { cells } = generateTimelineGrid(activeWeek)
+
+  return (
+    <div className="farm-map-wrapper">
+      {/* GIS Status & Layer Toolbar */}
+      <div className="gis-toolbar">
+        <div className="gis-toolbar-left">
+          <span className="gis-badge">
+            <span className="live-dot"></span>
+            <strong>GIS Engine:</strong> EPSG:4326 / WGS84 Georeferenced
+          </span>
+          <span className="gis-badge accuracy">
+            <strong>Offset:</strong> &lt; 0.1m Precision
+          </span>
+          <span className="gis-badge farm-size">
+            <strong>Total Area:</strong> 1,000 Acres (6 Management Parcels)
+          </span>
+        </div>
+
+        <div className="gis-toolbar-right">
+          <label className="toggle-label">
+            <input
+              type="checkbox"
+              checked={showHeatmap}
+              onChange={(e) => setShowHeatmap(e.target.checked)}
+            />
+            <span>3D Spectral Grid</span>
+          </label>
+
+          <label className="toggle-label">
+            <input
+              type="checkbox"
+              checked={showParcels}
+              onChange={(e) => setShowParcels(e.target.checked)}
+            />
+            <span>Parcels (A–F)</span>
+          </label>
+
+          <label className="toggle-label">
+            <input
+              type="checkbox"
+              checked={showHotspot}
+              onChange={(e) => setShowHotspot(e.target.checked)}
+            />
+            <span>5.2-Ac Hotspot</span>
+          </label>
+        </div>
+      </div>
+
+      {/* Main React Leaflet Map Container */}
+      <div className="map-container">
+        <MapContainer
+          center={FARM_METADATA.center}
+          zoom={14}
+          scrollWheelZoom={true}
+          className="farm-map"
+          zoomControl={true}
+        >
+          {/* Base Maps Layer Control: Esri Satellite (Default) and OpenStreetMap */}
+          <LayersControl position="topright">
+            <LayersControl.BaseLayer checked name="High-Res Satellite (Esri)">
+              <TileLayer
+                attribution="&copy; Esri World Imagery, Maxar, Earthstar Geographics"
+                url="https://server.arcgisonline.com/ArcGIS/rest/services/World_Imagery/MapServer/tile/{z}/{y}/{x}"
+                maxZoom={19}
+              />
+            </LayersControl.BaseLayer>
+
+            <LayersControl.BaseLayer name="Street Map (OSM)">
+              <TileLayer
+                attribution="&copy; OpenStreetMap contributors"
+                url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png"
+                maxZoom={19}
+              />
+            </LayersControl.BaseLayer>
+          </LayersControl>
+
+          {/* 1,000-Acre Farm Outer Perimeter Boundary */}
+          <Polygon
+            positions={FARM_METADATA.outer_boundary}
             pathOptions={{
-              color: color,
-              fillColor: color,
-              fillOpacity: 0.45,
-              weight: 1
+              color: '#163a24',
+              weight: 3,
+              fillColor: '#2d6a4f',
+              fillOpacity: 0.04,
+              dashArray: '4 4'
             }}
           >
             <Popup>
-              <strong>Crop Health Zone</strong>
+              <strong>{FARM_METADATA.farm_name}</strong>
               <br />
-              Severity: {Math.round(cell.severity * 100)}%
+              Total Area: <strong>{FARM_METADATA.total_acreage} Acres</strong> (404.7 Hectares)
+              <br />
+              Location: {FARM_METADATA.location}
+              <br />
+              Sensor: 200+ Band Hyperspectral (Airborne / Hyperion)
             </Popup>
-          </Circle>
-        )
-      })}
-    </>
-  )
-}
+          </Polygon>
 
-function FarmMap() {
-  const [showHeatmap, setShowHeatmap] = useState(true)
+          {/* 6 Agricultural Management Parcels (Parcels A to F) */}
+          {showParcels &&
+            FARM_METADATA.parcels.map((parcel) => {
+              const isCritical = parcel.risk === 'Critical'
+              return (
+                <Polygon
+                  key={parcel.id}
+                  positions={parcel.boundary}
+                  pathOptions={{
+                    color: isCritical ? '#dc2626' : '#22c55e',
+                    weight: isCritical ? 2.5 : 1.5,
+                    fillColor: isCritical ? '#ef4444' : '#22c55e',
+                    fillOpacity: isCritical ? 0.18 : 0.06
+                  }}
+                >
+                  <Popup>
+                    <strong>{parcel.name}</strong>
+                    <br />
+                    Parcel ID: <strong>{parcel.id}</strong> | Size: <strong>{parcel.acres} Acres</strong>
+                    <br />
+                    Crop Variety: {parcel.crop}
+                    <br />
+                    Status:{' '}
+                    <span style={{ color: isCritical ? '#dc2626' : '#16a34a', fontWeight: 'bold' }}>
+                      {parcel.status}
+                    </span>
+                    <br />
+                    Mean NDVI: <strong>{parcel.ndvi}</strong>
+                    {isCritical && (
+                      <div style={{ marginTop: '6px', color: '#dc2626', fontSize: '12px' }}>
+                        ⚠️ Early Fungal Blight Infection Detected in Zone Alpha (5.2 Acres)
+                      </div>
+                    )}
+                  </Popup>
+                </Polygon>
+              )
+            })}
 
-  return (
-    <MapContainer
-      center={farmPosition}
-      zoom={15}
-      scrollWheelZoom={true}
-      className="farm-map"
-      zoomControl={true}
-    >
+          {/* Georeferenced Spectral Grid Cells (Hyperspectral 3D-CNN/ViT Inference) */}
+          {showHeatmap &&
+            cells.map((cell) => (
+              <Polygon
+                key={cell.id}
+                positions={cell.bounds}
+                pathOptions={{
+                  color: cell.color,
+                  weight: cell.isHotspot ? 1.5 : 0.6,
+                  fillColor: cell.color,
+                  fillOpacity: cell.isHotspot ? 0.60 : 0.32
+                }}
+              >
+                <Popup>
+                  <strong>Spectral Cell: {cell.id}</strong>
+                  <br />
+                  GPS Center: {cell.center[0].toFixed(5)}, {cell.center[1].toFixed(5)}
+                  <br />
+                  Status: <strong>{cell.label}</strong>
+                  <br />
+                  Disease Severity: <strong>{(cell.severity * 100).toFixed(1)}%</strong>
+                  <br />
+                  Estimated NDVI: <strong>{cell.ndvi}</strong>
+                  {cell.isHotspot && (
+                    <div style={{ marginTop: '4px', color: '#dc2626', fontWeight: 'bold' }}>
+                      ⚡ 3-Week Early Outbreak Prediction Epicenter
+                    </div>
+                  )}
+                </Popup>
+              </Polygon>
+            ))}
 
-      {/* Base Maps */}
-      <LayersControl position="topright">
+          {/* 5.2-Acre Fungal Blight Outbreak Zone (Parcel C) */}
+          {showHotspot && (
+            <>
+              <Polygon
+                positions={DISEASE_HOTSPOT.boundary}
+                pathOptions={{
+                  color: '#dc2626',
+                  weight: 3.5,
+                  fillColor: '#ef4444',
+                  fillOpacity: 0.50,
+                  dashArray: '6 4'
+                }}
+              >
+                <Popup>
+                  <div style={{ minWidth: '220px' }}>
+                    <strong style={{ color: '#dc2626', fontSize: '14px' }}>
+                      🚨 {DISEASE_HOTSPOT.name}
+                    </strong>
+                    <hr style={{ margin: '6px 0', borderColor: '#fee2e2' }} />
+                    Area: <strong>{DISEASE_HOTSPOT.area_acres} Acres</strong> (Precision Targeted Zone)
+                    <br />
+                    Outbreak Lead Time: <strong>{DISEASE_HOTSPOT.lead_time_days} Days (3 Weeks Early)</strong>
+                    <br />
+                    Chlorophyll Dip: <strong>{DISEASE_HOTSPOT.chlorophyll_dip}</strong>
+                    <br />
+                    PRI Photochemical Index: <strong>{DISEASE_HOTSPOT.pri}</strong>
+                    <br />
+                    Recommended Action: <strong>Targeted bio-fungicide spray</strong>
+                    <div style={{ marginTop: '6px', fontSize: '11px', color: '#059669' }}>
+                      ✓ 94.8% Chemical Savings vs Blanket Spraying
+                    </div>
+                  </div>
+                </Popup>
+              </Polygon>
 
-        <LayersControl.BaseLayer
-          checked
-          name="Street Map"
-        >
-          <TileLayer
-            attribution="&copy; OpenStreetMap contributors"
-            url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png"
+              {/* Epicenter Marker */}
+              <Marker position={DISEASE_HOTSPOT.epicenter} icon={outbreakIcon}>
+                <Popup>
+                  <strong>Fungal Blight Epicenter</strong>
+                  <br />
+                  GPS: {DISEASE_HOTSPOT.epicenter[0]}, {DISEASE_HOTSPOT.epicenter[1]}
+                  <br />
+                  Predicted Outbreak Zone: 5.2 Acres
+                </Popup>
+              </Marker>
+            </>
+          )}
+
+          {/* Camera Navigation Buttons */}
+          <MapNavigationControls
+            centerCoords={FARM_METADATA.center}
+            hotspotCoords={DISEASE_HOTSPOT.epicenter}
           />
-        </LayersControl.BaseLayer>
 
-        <LayersControl.BaseLayer
-          name="Satellite"
-        >
-          <TileLayer
-            attribution="&copy; Esri"
-            url="https://server.arcgisonline.com/ArcGIS/rest/services/World_Imagery/MapServer/tile/{z}/{y}/{x}"
-          />
-        </LayersControl.BaseLayer>
+          {/* Map Legend */}
+          <HeatmapLegend currentWeek={activeWeek} />
+        </MapContainer>
+      </div>
 
-      </LayersControl>
-
-
-      {/* Farm Marker */}
-      <Marker position={farmPosition}>
-        <Popup>
-          <strong>Wadgaon Farm</strong>
-          <br />
-          Wheat Farm
-        </Popup>
-      </Marker>
-
-
-      {/* Farm Boundary */}
-      <Polygon
-        positions={farmBoundary}
-        pathOptions={{
-          color: 'green',
-          fillColor: 'green',
-          fillOpacity: 0.25
-        }}
-      >
-        <Popup>
-          <strong>Wadgaon Farm</strong>
-          <br />
-          Area: 2.5 Acres
-        </Popup>
-      </Polygon>
-
-
-      {/* Crop Health Heatmap */}
-      {showHeatmap && <CropHealthHeatmap />}
-
-
-      {/* Custom Controls */}
-      <CenterFarmButton />
-
-      <HeatmapToggle
-        showHeatmap={showHeatmap}
-        setShowHeatmap={setShowHeatmap}
+      {/* Embedded Timeline Progression Slider (Week 4 Milestone) */}
+      <TimelineSlider
+        currentWeek={activeWeek}
+        onWeekChange={handleWeekChange}
+        isPlaying={isPlaying}
+        setIsPlaying={setIsPlaying}
       />
-
-      <HeatmapLegend />
-
-    </MapContainer>
+    </div>
   )
 }
 
