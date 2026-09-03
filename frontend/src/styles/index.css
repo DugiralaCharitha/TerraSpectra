@@ -2503,11 +2503,11 @@ body,
   align-items: center;
   outline: none;
 }
-
+border
 .node-dot {
   width: 18px;
   height: 18px;
-  border-radius: 50%;
+  -radius: 50%;
   border: 3px solid white;
   box-shadow: 0 0 0 2px #cbd5e1;
   transition: all 0.2s ease;
@@ -5337,4 +5337,5404 @@ body,
   opacity: 0.5;
   cursor: not-allowed;
 }
+/* =========================================================
+   GLOBAL RESET
+   ========================================================= */
 
+* {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+html {
+  scroll-behavior: smooth;
+}
+
+body {
+  font-family: Arial, sans-serif;
+  background: #f4f7f4;
+  color: #1f2937;
+}
+
+#root {
+  min-height: 100vh;
+}
+
+
+/* =========================================================
+   DASHBOARD
+   ========================================================= */
+
+.dashboard {
+  min-height: 100vh;
+}
+
+
+/* =========================================================
+   HEADER
+   ========================================================= */
+
+.dashboard-header {
+  padding: 24px 40px;
+  background: #163a24;
+  color: white;
+}
+
+.dashboard-header h1 {
+  font-size: 30px;
+  margin-bottom: 6px;
+  font-weight: 700;
+}
+
+.dashboard-header p {
+  font-size: 16px;
+  opacity: 0.85;
+}
+
+
+/* =========================================================
+   DASHBOARD CONTENT
+   ========================================================= */
+
+.dashboard-content {
+  padding: 30px;
+  max-width: 1800px;
+  margin: 0 auto;
+}
+
+
+/* =========================================================
+   FARM MAP CARD
+   ========================================================= */
+
+.map-card {
+  background: white;
+  border-radius: 12px;
+  padding: 24px;
+  box-shadow: 0 4px 16px rgba(0, 0, 0, 0.08);
+}
+
+.map-card h2 {
+  margin-bottom: 20px;
+  font-size: 26px;
+  color: #1f2937;
+}
+
+
+/* =========================================================
+   MAP CONTAINER
+   ========================================================= */
+
+.map-container {
+  width: 100%;
+  height: 500px;
+  overflow: hidden;
+  border-radius: 12px;
+  position: relative;
+}
+
+.farm-map {
+  width: 100%;
+  height: 100%;
+  position: relative;
+}
+
+
+/* =========================================================
+   LEAFLET MAP
+   ========================================================= */
+
+.farm-map .leaflet-container {
+  width: 100%;
+  height: 100%;
+}
+
+
+/* =========================================================
+   ZOOM CONTROLS
+   ========================================================= */
+
+/*
+   Leaflet's default zoom controls stay at the
+   top-left. We give them enough space so that
+   custom controls don't overlap them.
+*/
+
+.farm-map .leaflet-control-zoom {
+  margin-top: 10px !important;
+  margin-left: 10px !important;
+  border: none !important;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.18);
+}
+
+.farm-map .leaflet-control-zoom a {
+  width: 36px !important;
+  height: 34px !important;
+  line-height: 32px !important;
+  font-size: 20px !important;
+  color: #1f2937 !important;
+  background: white !important;
+}
+
+.farm-map .leaflet-control-zoom a:hover {
+  background: #f4f7f4 !important;
+}
+
+
+/* =========================================================
+   CENTER FARM BUTTON
+   ========================================================= */
+
+.center-farm-control {
+  position: absolute;
+  top: 85px;
+  left: 10px;
+  z-index: 1000;
+}
+
+.center-farm-control button {
+  background: white;
+  border: 1px solid #d1d5db;
+  border-radius: 7px;
+  padding: 9px 13px;
+  font-size: 14px;
+  font-weight: 600;
+  color: #1f2937;
+  cursor: pointer;
+  white-space: nowrap;
+
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.18);
+
+  transition:
+    background 0.2s ease,
+    transform 0.2s ease,
+    box-shadow 0.2s ease;
+}
+
+.center-farm-control button:hover {
+  background: #f1f5f2;
+  transform: translateY(-1px);
+  box-shadow: 0 3px 10px rgba(0, 0, 0, 0.2);
+}
+
+.center-farm-control button:active {
+  transform: translateY(0);
+}
+
+
+/* =========================================================
+   HEATMAP TOGGLE
+   ========================================================= */
+
+.heatmap-toggle {
+  position: absolute;
+  top: 135px;
+  left: 10px;
+  z-index: 1000;
+}
+
+.heatmap-toggle button {
+  background: white;
+  border: 1px solid #d1d5db;
+  border-radius: 7px;
+  padding: 9px 13px;
+  font-size: 14px;
+  font-weight: 600;
+  color: #1f2937;
+  cursor: pointer;
+  white-space: nowrap;
+
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.18);
+
+  transition:
+    background 0.2s ease,
+    transform 0.2s ease,
+    box-shadow 0.2s ease;
+}
+
+.heatmap-toggle button:hover {
+  background: #f1f5f2;
+  transform: translateY(-1px);
+  box-shadow: 0 3px 10px rgba(0, 0, 0, 0.2);
+}
+
+.heatmap-toggle button:active {
+  transform: translateY(0);
+}
+
+
+/* =========================================================
+   CROP HEALTH LEGEND
+   ========================================================= */
+
+/*
+   The legend is deliberately placed at the
+   bottom-left so it does not interfere with:
+   - Zoom controls
+   - Center Farm
+   - Heatmap toggle
+*/
+
+.heatmap-legend {
+  position: absolute;
+  left: 10px;
+  bottom: 20px;
+  z-index: 1000;
+
+  min-width: 165px;
+
+  background: rgba(255, 255, 255, 0.97);
+
+  padding: 14px 16px;
+
+  border-radius: 10px;
+
+  border: 1px solid #e5e7eb;
+
+  box-shadow: 0 3px 12px rgba(0, 0, 0, 0.2);
+
+  font-size: 13px;
+  line-height: 1.6;
+}
+
+.heatmap-legend h4 {
+  margin: 0 0 10px 0;
+
+  font-size: 15px;
+  font-weight: 700;
+
+  color: #1f2937;
+}
+
+.legend-item {
+  display: flex;
+  align-items: center;
+
+  gap: 8px;
+
+  margin: 5px 0;
+
+  color: #374151;
+}
+
+.legend-color {
+  width: 14px;
+  height: 14px;
+
+  border-radius: 50%;
+
+  display: inline-block;
+
+  flex-shrink: 0;
+
+  border: 1px solid rgba(0, 0, 0, 0.08);
+}
+
+.legend-green {
+  background: #16a34a;
+}
+
+.legend-yellow {
+  background: #facc15;
+}
+
+.legend-orange {
+  background: #f97316;
+}
+
+.legend-red {
+  background: #ef4444;
+}
+
+
+/* =========================================================
+   LEAFLET LAYER CONTROL
+   ========================================================= */
+
+.farm-map .leaflet-control-layers {
+  margin-top: 10px !important;
+  margin-right: 10px !important;
+
+  border-radius: 8px !important;
+
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.18);
+
+  border: 1px solid #d1d5db;
+}
+
+.farm-map .leaflet-control-layers-toggle {
+  width: 44px;
+  height: 44px;
+}
+
+.farm-map .leaflet-control-layers-expanded {
+  padding: 10px;
+  background: white;
+}
+
+
+/* =========================================================
+   LEAFLET POPUPS
+   ========================================================= */
+
+.farm-map .leaflet-popup-content-wrapper {
+  border-radius: 9px;
+}
+
+.farm-map .leaflet-popup-content {
+  font-size: 14px;
+  line-height: 1.5;
+}
+
+.farm-map .leaflet-popup-content strong {
+  color: #163a24;
+}
+
+
+/* =========================================================
+   FARM INFORMATION CARD
+   ========================================================= */
+
+.farm-info-card {
+  margin-top: 30px;
+
+  background: white;
+
+  border-radius: 12px;
+
+  padding: 24px;
+
+  box-shadow: 0 4px 16px rgba(0, 0, 0, 0.08);
+}
+
+.farm-info-card h2 {
+  margin-bottom: 20px;
+
+  font-size: 26px;
+
+  color: #1f2937;
+}
+
+.farm-info-grid {
+  display: grid;
+
+  grid-template-columns: repeat(3, 1fr);
+
+  gap: 18px;
+}
+
+.info-item {
+  background: #f4f7f4;
+
+  border-radius: 10px;
+
+  padding: 18px;
+
+  border: 1px solid #e0e7e1;
+}
+
+.info-item span {
+  display: block;
+
+  color: #53665a;
+
+  font-size: 14px;
+
+  margin-bottom: 7px;
+}
+
+.info-item strong {
+  display: block;
+
+  font-size: 18px;
+
+  color: #1f2937;
+}
+
+.status-healthy {
+  color: #16803c !important;
+}
+
+
+/* =========================================================
+   CROP HEALTH CARD
+   ========================================================= */
+
+.crop-health-card {
+  margin-top: 30px;
+
+  background: white;
+
+  border-radius: 12px;
+
+  padding: 24px;
+
+  box-shadow: 0 4px 16px rgba(0, 0, 0, 0.08);
+}
+
+.crop-health-card h2 {
+  margin-bottom: 20px;
+
+  font-size: 26px;
+
+  color: #1f2937;
+}
+
+.crop-health-grid {
+  display: grid;
+
+  grid-template-columns: repeat(5, 1fr);
+
+  gap: 18px;
+}
+
+.health-item {
+  background: #f4f7f4;
+
+  border-radius: 10px;
+
+  padding: 18px;
+
+  border: 1px solid #e0e7e1;
+}
+
+.health-item span {
+  display: block;
+
+  color: #53665a;
+
+  font-size: 14px;
+
+  margin-bottom: 7px;
+}
+
+.health-item strong {
+  display: block;
+
+  font-size: 22px;
+
+  color: #1f2937;
+}
+
+.health-item .status-healthy {
+  color: #16803c !important;
+}
+
+
+/* =========================================================
+   FARM OVERVIEW
+   ========================================================= */
+
+.farm-overview {
+  margin-top: 24px;
+
+  padding-top: 24px;
+
+  border-top: 1px solid #e5e7eb;
+}
+
+.farm-overview h2 {
+  margin-bottom: 16px;
+}
+
+.overview-grid {
+  display: grid;
+
+  grid-template-columns: repeat(5, 1fr);
+
+  gap: 16px;
+}
+
+.overview-item {
+  padding: 18px;
+
+  background: #f4f7f4;
+
+  border-radius: 10px;
+
+  border: 1px solid #e0e7e1;
+}
+
+.overview-item span {
+  display: block;
+
+  font-size: 14px;
+
+  color: #53665a;
+
+  margin-bottom: 8px;
+}
+
+.overview-item strong {
+  display: block;
+
+  font-size: 17px;
+
+  color: #163a24;
+}
+
+
+/* =========================================================
+   RESPONSIVE - TABLET
+   ========================================================= */
+
+@media (max-width: 1000px) {
+
+  .dashboard-content {
+    padding: 24px;
+  }
+
+  .farm-info-grid {
+    grid-template-columns: repeat(2, 1fr);
+  }
+
+  .crop-health-grid {
+    grid-template-columns: repeat(2, 1fr);
+  }
+
+  .overview-grid {
+    grid-template-columns: repeat(2, 1fr);
+  }
+}
+
+
+/* =========================================================
+   RESPONSIVE - MOBILE
+   ========================================================= */
+
+@media (max-width: 600px) {
+
+  .dashboard-header {
+    padding: 20px;
+  }
+
+  .dashboard-header h1 {
+    font-size: 26px;
+  }
+
+  .dashboard-header p {
+    font-size: 14px;
+  }
+
+  .dashboard-content {
+    padding: 15px;
+  }
+
+  .map-card,
+  .farm-info-card,
+  .crop-health-card {
+    padding: 16px;
+  }
+
+  .map-card h2,
+  .farm-info-card h2,
+  .crop-health-card h2 {
+    font-size: 22px;
+  }
+
+  .map-container {
+    height: 450px;
+  }
+
+  .farm-info-grid,
+  .crop-health-grid,
+  .overview-grid {
+    grid-template-columns: 1fr;
+  }
+
+  /*
+     Keep controls separated on small screens.
+  */
+
+  .center-farm-control {
+    top: 80px;
+    left: 8px;
+  }
+
+  .heatmap-toggle {
+    top: 130px;
+    left: 8px;
+  }
+
+  .heatmap-legend {
+    left: 8px;
+    bottom: 12px;
+
+    min-width: 145px;
+
+    padding: 11px 13px;
+
+    font-size: 12px;
+  }
+
+  .heatmap-legend h4 {
+    font-size: 14px;
+  }
+
+  .farm-map .leaflet-control-zoom {
+    margin-left: 8px !important;
+  }
+
+  .farm-map .leaflet-control-layers {
+    margin-right: 8px !important;
+  }
+}
+
+
+/* =========================================================
+   VERY SMALL SCREENS
+   ========================================================= */
+
+@media (max-width: 400px) {
+
+  .map-container {
+    height: 400px;
+  }
+
+  .center-farm-control button,
+  .heatmap-toggle button {
+    font-size: 13px;
+    padding: 8px 10px;
+  }
+
+  .heatmap-legend {
+    min-width: 135px;
+  }
+}
+/* =========================================================
+   CROP HEALTH TREND
+   ========================================================= */
+
+.trend-card {
+  margin-top: 30px;
+  background: white;
+  border-radius: 12px;
+  padding: 24px;
+  box-shadow: 0 4px 16px rgba(0, 0, 0, 0.08);
+}
+
+.trend-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 24px;
+}
+
+.trend-header h2 {
+  font-size: 26px;
+  color: #1f2937;
+  margin-bottom: 6px;
+}
+
+.trend-header p {
+  color: #53665a;
+  font-size: 14px;
+}
+
+.trend-current {
+  text-align: right;
+}
+
+.trend-current span {
+  display: block;
+  color: #53665a;
+  font-size: 13px;
+  margin-bottom: 4px;
+}
+
+.trend-current strong {
+  font-size: 28px;
+  color: #16803c;
+}
+
+
+/* Chart */
+
+.trend-chart {
+  display: flex;
+  width: 100%;
+  height: 300px;
+}
+
+.chart-y-axis {
+  width: 45px;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  padding-bottom: 32px;
+  color: #6b7280;
+  font-size: 12px;
+  text-align: right;
+  padding-right: 10px;
+}
+
+.chart-area {
+  position: relative;
+  flex: 1;
+  height: 100%;
+  border-left: 1px solid #d1d5db;
+  border-bottom: 1px solid #d1d5db;
+}
+
+
+/* Horizontal grid lines */
+
+.chart-grid-line {
+  position: absolute;
+  left: 0;
+  right: 0;
+  height: 1px;
+  background: #e5e7eb;
+}
+
+.line-1 {
+  top: 8%;
+}
+
+.line-2 {
+  top: 26%;
+}
+
+.line-3 {
+  top: 44%;
+}
+
+.line-4 {
+  top: 62%;
+}
+
+.line-5 {
+  top: 80%;
+}
+
+
+/* Trend line */
+
+.trend-line {
+  position: absolute;
+  left: 5%;
+  right: 5%;
+  top: 8%;
+  height: 72%;
+}
+
+
+/*
+   The line is represented using a clipped polygon.
+*/
+
+.trend-line::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+
+  background: #16803c;
+
+  clip-path: polygon(
+    0% 62%,
+    16% 48%,
+    33% 54%,
+    50% 35%,
+    66% 40%,
+    83% 24%,
+    100% 30%,
+    100% 33%,
+    83% 27%,
+    66% 43%,
+    50% 38%,
+    33% 57%,
+    16% 51%,
+    0% 65%
+  );
+}
+
+
+/* Chart points */
+
+.chart-point {
+  position: absolute;
+
+  width: 10px;
+  height: 10px;
+
+  background: white;
+
+  border: 3px solid #16803c;
+
+  border-radius: 50%;
+
+  transform: translate(-50%, -50%);
+
+  z-index: 2;
+}
+
+.point-1 {
+  left: 0%;
+  top: 63%;
+}
+
+.point-2 {
+  left: 16.6%;
+  top: 49%;
+}
+
+.point-3 {
+  left: 33.3%;
+  top: 55%;
+}
+
+.point-4 {
+  left: 50%;
+  top: 36%;
+}
+
+.point-5 {
+  left: 66.6%;
+  top: 41%;
+}
+
+.point-6 {
+  left: 83.3%;
+  top: 25%;
+}
+
+.point-7 {
+  left: 100%;
+  top: 31%;
+}
+
+
+/* Day labels */
+
+.chart-labels {
+  position: absolute;
+  left: 0;
+  right: 0;
+  bottom: -30px;
+
+  display: flex;
+  justify-content: space-between;
+
+  color: #6b7280;
+
+  font-size: 12px;
+}
+
+
+/* =========================================================
+   FARM MONITORING
+   ========================================================= */
+
+.status-card {
+  margin-top: 30px;
+
+  background: white;
+
+  border-radius: 12px;
+
+  padding: 24px;
+
+  box-shadow: 0 4px 16px rgba(0, 0, 0, 0.08);
+}
+
+.status-card h2 {
+  margin-bottom: 20px;
+
+  font-size: 26px;
+
+  color: #1f2937;
+}
+
+.status-grid {
+  display: grid;
+
+  grid-template-columns: repeat(4, 1fr);
+
+  gap: 18px;
+}
+
+.monitor-item {
+  display: flex;
+
+  align-items: center;
+
+  gap: 14px;
+
+  background: #f4f7f4;
+
+  border-radius: 10px;
+
+  padding: 18px;
+
+  border: 1px solid #e0e7e1;
+}
+
+.monitor-icon {
+  width: 14px;
+  height: 14px;
+
+  border-radius: 50%;
+
+  flex-shrink: 0;
+}
+
+.healthy-dot {
+  background: #16a34a;
+}
+
+.warning-dot {
+  background: #f59e0b;
+}
+
+.monitor-item span {
+  display: block;
+
+  color: #53665a;
+
+  font-size: 13px;
+
+  margin-bottom: 5px;
+}
+
+.monitor-item strong {
+  display: block;
+
+  color: #1f2937;
+
+  font-size: 17px;
+}
+
+
+/* =========================================================
+   RESPONSIVE TREND
+   ========================================================= */
+
+@media (max-width: 1000px) {
+
+  .status-grid {
+    grid-template-columns: repeat(2, 1fr);
+  }
+
+}
+
+
+@media (max-width: 600px) {
+
+  .trend-card,
+  .status-card {
+    padding: 16px;
+  }
+
+  .trend-header {
+    align-items: flex-start;
+    gap: 15px;
+  }
+
+  .trend-header h2,
+  .status-card h2 {
+    font-size: 22px;
+  }
+
+  .trend-current strong {
+    font-size: 22px;
+  }
+
+  .trend-chart {
+    height: 240px;
+  }
+
+  .status-grid {
+    grid-template-columns: 1fr;
+  }
+
+}
+/* =========================================================
+   ALERTS & RECOMMENDATIONS
+   ========================================================= */
+
+.alerts-card {
+  margin-top: 30px;
+
+  background: white;
+
+  border-radius: 12px;
+
+  padding: 24px;
+
+  box-shadow: 0 4px 16px rgba(0, 0, 0, 0.08);
+}
+
+
+/* Header */
+
+.alerts-header {
+  display: flex;
+
+  align-items: center;
+
+  justify-content: space-between;
+
+  gap: 20px;
+
+  margin-bottom: 20px;
+}
+
+.alerts-header h2 {
+  font-size: 26px;
+
+  color: #1f2937;
+
+  margin-bottom: 6px;
+}
+
+.alerts-header p {
+  color: #53665a;
+
+  font-size: 14px;
+}
+
+
+/* Alert count */
+
+.alert-count {
+  background: #fff7ed;
+
+  color: #c2410c;
+
+  border: 1px solid #fed7aa;
+
+  padding: 7px 12px;
+
+  border-radius: 20px;
+
+  font-size: 13px;
+
+  font-weight: 600;
+
+  white-space: nowrap;
+}
+
+
+/* Alert list */
+
+.alerts-list {
+  display: flex;
+
+  flex-direction: column;
+
+  gap: 14px;
+}
+
+
+/* Individual alert */
+
+.alert-item {
+  display: flex;
+
+  align-items: flex-start;
+
+  gap: 16px;
+
+  padding: 18px;
+
+  border-radius: 10px;
+
+  border: 1px solid;
+}
+
+
+/* Warning alert */
+
+.alert-warning {
+  background: #fffaf0;
+
+  border-color: #fde68a;
+}
+
+
+/* Information alert */
+
+.alert-info {
+  background: #f0fdf4;
+
+  border-color: #bbf7d0;
+}
+
+
+/* Alert icon */
+
+.alert-icon {
+  width: 40px;
+
+  height: 40px;
+
+  display: flex;
+
+  align-items: center;
+
+  justify-content: center;
+
+  flex-shrink: 0;
+
+  background: white;
+
+  border-radius: 50%;
+
+  font-size: 20px;
+
+  box-shadow: 0 1px 4px rgba(0, 0, 0, 0.08);
+}
+
+
+/* Alert content */
+
+.alert-content {
+  flex: 1;
+}
+
+.alert-content h3 {
+  font-size: 17px;
+
+  color: #1f2937;
+
+  margin-bottom: 6px;
+}
+
+.alert-content p {
+  font-size: 14px;
+
+  line-height: 1.5;
+
+  color: #53665a;
+
+  margin-bottom: 8px;
+}
+
+
+/* Alert label */
+
+.alert-time {
+  font-size: 12px;
+
+  font-weight: 600;
+
+  color: #6b7280;
+}
+
+
+/* =========================================================
+   ALERTS RESPONSIVE
+   ========================================================= */
+
+@media (max-width: 600px) {
+
+  .alerts-card {
+    padding: 16px;
+  }
+
+  .alerts-header {
+    align-items: flex-start;
+  }
+
+  .alerts-header h2 {
+    font-size: 22px;
+  }
+
+  .alert-item {
+    padding: 14px;
+
+    gap: 12px;
+  }
+
+  .alert-icon {
+    width: 36px;
+
+    height: 36px;
+
+    font-size: 18px;
+  }
+
+  .alert-content h3 {
+    font-size: 16px;
+  }
+
+  .alert-content p {
+    font-size: 13px;
+  }
+
+}
+/* =========================================================
+   MAIN NAVIGATION
+   ========================================================= */
+
+.main-navigation {
+  min-height: 68px;
+  padding: 12px 30px;
+
+  background: #ffffff;
+
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+
+  gap: 24px;
+
+  border-bottom: 1px solid #e5e7eb;
+
+  position: sticky;
+  top: 0;
+
+  z-index: 1000;
+}
+
+
+/* Brand */
+
+.nav-brand {
+  display: flex;
+  flex-direction: column;
+
+  min-width: 180px;
+}
+
+.nav-brand strong {
+  color: #163a24;
+
+  font-size: 20px;
+
+  line-height: 1.2;
+}
+
+.nav-brand span {
+  color: #6b7280;
+
+  font-size: 11px;
+
+  margin-top: 3px;
+}
+
+
+/* Navigation links */
+
+.nav-links {
+  display: flex;
+
+  align-items: center;
+
+  justify-content: center;
+
+  gap: 8px;
+
+  flex: 1;
+}
+
+.nav-links a {
+  text-decoration: none;
+
+  color: #53665a;
+
+  font-size: 14px;
+
+  font-weight: 600;
+
+  padding: 9px 13px;
+
+  border-radius: 7px;
+
+  transition:
+    background 0.2s ease,
+    color 0.2s ease;
+}
+
+.nav-links a:hover {
+  background: #f0f5f1;
+
+  color: #163a24;
+}
+
+
+/* Farm status */
+
+.nav-status {
+  display: flex;
+
+  align-items: center;
+
+  gap: 7px;
+
+  padding: 8px 12px;
+
+  background: #f0fdf4;
+
+  border: 1px solid #bbf7d0;
+
+  border-radius: 20px;
+
+  color: #166534;
+
+  font-size: 13px;
+
+  font-weight: 600;
+
+  white-space: nowrap;
+}
+
+.status-dot {
+  width: 8px;
+
+  height: 8px;
+
+  border-radius: 50%;
+
+  background: #22c55e;
+}
+
+
+/* =========================================================
+   NAVIGATION RESPONSIVE
+   ========================================================= */
+
+@media (max-width: 800px) {
+
+  .main-navigation {
+    padding: 12px 18px;
+
+    flex-wrap: wrap;
+
+    gap: 12px;
+  }
+
+  .nav-brand {
+    min-width: auto;
+  }
+
+  .nav-links {
+    order: 3;
+
+    flex-basis: 100%;
+
+    overflow-x: auto;
+
+    justify-content: flex-start;
+
+    padding-bottom: 3px;
+  }
+
+  .nav-status {
+    margin-left: auto;
+  }
+}
+
+
+@media (max-width: 500px) {
+
+  .main-navigation {
+    padding: 10px 14px;
+  }
+
+  .nav-brand strong {
+    font-size: 18px;
+  }
+
+  .nav-brand span {
+    display: none;
+  }
+
+  .nav-status {
+    font-size: 12px;
+
+    padding: 7px 9px;
+  }
+
+  .nav-links a {
+    font-size: 13px;
+
+    padding: 8px 10px;
+  }
+
+}
+/* ============================= */
+/* MOBILE RESPONSIVE FIX */
+/* ============================= */
+
+html,
+body,
+#root {
+  width: 100%;
+  max-width: 100%;
+  overflow-x: hidden;
+}
+
+.dashboard {
+  width: 100%;
+  min-width: 0;
+  overflow-x: hidden;
+}
+
+/* Header */
+.dashboard-header {
+  width: 100%;
+  padding: 20px;
+}
+
+.dashboard-header h1 {
+  font-size: 26px;
+}
+
+/* Main content */
+.dashboard-content {
+  width: 100%;
+  max-width: 100%;
+  padding: 16px;
+}
+
+/* Cards */
+.map-card,
+.farm-info-card,
+.crop-health-card,
+.trend-card,
+.status-card,
+.alerts-card {
+  width: 100%;
+  max-width: 100%;
+  min-width: 0;
+}
+
+/* Map */
+.map-container {
+  width: 100%;
+  max-width: 100%;
+  height: 420px;
+  overflow: hidden;
+}
+
+/* Farm information */
+.farm-info-grid {
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+}
+
+.crop-health-grid {
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+}
+
+.overview-grid {
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+}
+
+/* Prevent text from forcing cards wider */
+.info-item,
+.health-item,
+.monitor-item,
+.alert-item {
+  min-width: 0;
+  overflow-wrap: break-word;
+}
+
+/* Trend chart */
+.trend-card {
+  overflow: hidden;
+}
+
+.trend-chart {
+  width: 100%;
+  max-width: 100%;
+  overflow: hidden;
+}
+
+/* ============================= */
+/* SMALL PHONES */
+/* ============================= */
+
+@media (max-width: 600px) {
+
+  .dashboard-content {
+    padding: 12px;
+  }
+
+  .dashboard-header {
+    padding: 18px 16px;
+  }
+
+  .dashboard-header h1 {
+    font-size: 24px;
+  }
+
+  .dashboard-header p {
+    font-size: 14px;
+  }
+
+  .map-card,
+  .farm-info-card,
+  .crop-health-card,
+  .trend-card,
+  .status-card,
+  .alerts-card {
+    padding: 16px;
+    margin-top: 16px;
+  }
+
+  .map-container {
+    height: 360px;
+  }
+
+  .farm-info-grid,
+  .crop-health-grid,
+  .overview-grid {
+    grid-template-columns: 1fr;
+  }
+
+  .farm-info-card h2,
+  .crop-health-card h2,
+  .trend-card h2,
+  .status-card h2,
+  .alerts-card h2,
+  .map-card h2 {
+    font-size: 20px;
+  }
+
+  /* Keep Leaflet controls inside the map */
+  .leaflet-control {
+    max-width: calc(100% - 20px);
+  }
+
+  .heatmap-legend {
+    max-width: 150px;
+    font-size: 11px;
+  }
+
+  .heatmap-toggle button,
+  .center-farm-control button {
+    font-size: 12px;
+    padding: 7px 9px;
+  }
+
+  /* Navigation if present */
+  .dashboard-nav {
+    width: 100%;
+    overflow-x: auto;
+  }
+
+  .dashboard-nav ul {
+    width: max-content;
+    min-width: 100%;
+  }
+}
+
+/* ============================= */
+/* VERY SMALL PHONES */
+/* ============================= */
+
+@media (max-width: 400px) {
+
+  .dashboard-content {
+    padding: 10px;
+  }
+
+  .dashboard-header {
+    padding: 16px 12px;
+  }
+
+  .map-card,
+  .farm-info-card,
+  .crop-health-card,
+  .trend-card,
+  .status-card,
+  .alerts-card {
+    padding: 14px;
+  }
+
+  .map-container {
+    height: 330px;
+  }
+
+  .heatmap-legend {
+    max-width: 135px;
+    padding: 8px;
+  }
+
+  .heatmap-toggle button,
+  .center-farm-control button {
+    font-size: 11px;
+    padding: 6px 8px;
+  }
+}
+/* ================================
+   MOBILE RESPONSIVE FIX
+   ================================ */
+
+@media (max-width: 600px) {
+
+  .dashboard {
+    width: 100%;
+    overflow-x: hidden;
+  }
+
+  .dashboard-header {
+    padding: 20px 16px;
+  }
+
+  .dashboard-header h1 {
+    font-size: 24px;
+  }
+
+  .dashboard-header p {
+    font-size: 14px;
+  }
+
+  .dashboard-content {
+    width: 100%;
+    padding: 16px;
+  }
+
+  .map-card,
+  .farm-info-card,
+  .crop-health-card,
+  .trend-card,
+  .status-card,
+  .alerts-card {
+    width: 100%;
+    padding: 16px;
+    margin-left: 0;
+    margin-right: 0;
+  }
+
+  .map-container {
+    width: 100%;
+    height: 400px;
+  }
+
+  .farm-map {
+    width: 100%;
+    height: 100%;
+  }
+
+  .farm-info-grid,
+  .crop-health-grid,
+  .status-grid {
+    grid-template-columns: 1fr;
+    width: 100%;
+  }
+
+  .overview-grid {
+    grid-template-columns: 1fr;
+  }
+
+  .trend-card {
+    overflow: hidden;
+  }
+
+  .trend-chart {
+    width: 100%;
+    overflow-x: auto;
+  }
+
+  .alerts-list {
+    width: 100%;
+  }
+
+  .alert-item {
+    width: 100%;
+  }
+}
+/* =========================================
+   MOBILE RESPONSIVE DESIGN
+   ========================================= */
+
+html,
+body,
+#root {
+  width: 100%;
+  max-width: 100%;
+  overflow-x: hidden;
+}
+
+/* Prevent dashboard from becoming wider than screen */
+.dashboard {
+  width: 100%;
+  max-width: 100%;
+  overflow-x: hidden;
+}
+
+/* Header */
+.dashboard-header {
+  width: 100%;
+  padding: 20px;
+}
+
+.dashboard-header h1 {
+  font-size: 26px;
+}
+
+.dashboard-header p {
+  font-size: 14px;
+}
+
+/* Main content */
+.dashboard-content {
+  width: 100%;
+  padding: 16px;
+}
+
+/* Cards */
+.map-card,
+.farm-info-card,
+.crop-health-card,
+.trend-card,
+.status-card,
+.alerts-card {
+  width: 100%;
+  max-width: 100%;
+  padding: 18px;
+  margin-top: 18px;
+}
+
+/* Map */
+.map-container {
+  width: 100%;
+  height: 400px;
+}
+
+.farm-map {
+  width: 100%;
+  height: 100%;
+}
+
+/* Farm information */
+.farm-info-grid {
+  grid-template-columns: 1fr;
+  gap: 12px;
+}
+
+.info-item {
+  padding: 16px;
+}
+
+/* Crop health */
+.crop-health-grid {
+  grid-template-columns: 1fr;
+  gap: 12px;
+}
+
+.health-item {
+  padding: 16px;
+}
+
+/* Trend section */
+.trend-card {
+  overflow: hidden;
+}
+
+.trend-header {
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+  align-items: flex-start;
+}
+
+.trend-current {
+  width: 100%;
+}
+
+/* Chart */
+.trend-chart {
+  width: 100%;
+  overflow-x: auto;
+}
+
+.chart-area {
+  min-width: 500px;
+}
+
+/* Farm monitoring */
+.status-grid {
+  grid-template-columns: 1fr;
+  gap: 12px;
+}
+
+.monitor-item {
+  width: 100%;
+}
+
+/* Alerts */
+.alerts-header {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+  align-items: flex-start;
+}
+
+.alert-count {
+  align-self: flex-start;
+}
+
+.alert-item {
+  width: 100%;
+}
+
+/* Map controls */
+.center-farm-control {
+  margin-top: 10px;
+}
+
+.heatmap-toggle {
+  margin-top: 10px;
+}
+
+/* Very small phones */
+@media (max-width: 480px) {
+
+  .dashboard-content {
+    padding: 10px;
+  }
+
+  .dashboard-header {
+    padding: 18px 16px;
+  }
+
+  .dashboard-header h1 {
+    font-size: 23px;
+  }
+
+  .dashboard-header p {
+    font-size: 13px;
+  }
+
+  .map-card,
+  .farm-info-card,
+  .crop-health-card,
+  .trend-card,
+  .status-card,
+  .alerts-card {
+    padding: 14px;
+  }
+
+  .map-container {
+    height: 350px;
+  }
+
+  .map-card h2,
+  .farm-info-card h2,
+  .crop-health-card h2,
+  .trend-card h2,
+  .status-card h2,
+  .alerts-card h2 {
+    font-size: 20px;
+  }
+}
+/* =========================================
+   LOGIN PAGE
+   ========================================= */
+
+.login-page {
+  min-height: 100vh;
+  width: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 30px;
+  background: #f4f7f4;
+}
+
+.login-card {
+  width: 100%;
+  max-width: 440px;
+  background: white;
+  border-radius: 16px;
+  padding: 36px;
+  box-shadow: 0 8px 30px rgba(0, 0, 0, 0.1);
+}
+
+.login-header {
+  text-align: center;
+  margin-bottom: 32px;
+}
+
+.login-header h1 {
+  color: #163a24;
+  font-size: 30px;
+  margin-bottom: 6px;
+}
+
+.login-header p {
+  color: #53665a;
+  font-size: 14px;
+}
+
+.login-title {
+  margin-bottom: 24px;
+}
+
+.login-title h2 {
+  color: #1f2937;
+  font-size: 24px;
+  margin-bottom: 6px;
+}
+
+.login-title p {
+  color: #53665a;
+  font-size: 14px;
+}
+
+.login-form {
+  display: flex;
+  flex-direction: column;
+  gap: 18px;
+}
+
+.form-group {
+  display: flex;
+  flex-direction: column;
+  gap: 7px;
+}
+
+.form-group label {
+  font-size: 14px;
+  font-weight: 600;
+  color: #1f2937;
+}
+
+.form-group input {
+  width: 100%;
+  padding: 12px 14px;
+  border: 1px solid #d1d5db;
+  border-radius: 8px;
+  font-size: 15px;
+  outline: none;
+  transition: border-color 0.2s, box-shadow 0.2s;
+}
+
+.form-group input:focus {
+  border-color: #2e7d32;
+  box-shadow: 0 0 0 3px rgba(46, 125, 50, 0.12);
+}
+
+.login-options {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 10px;
+  font-size: 13px;
+}
+
+.remember-me {
+  display: flex;
+  align-items: center;
+  gap: 7px;
+  color: #53665a;
+}
+
+.remember-me input {
+  accent-color: #2e7d32;
+}
+
+.forgot-password {
+  border: none;
+  background: none;
+  color: #2e7d32;
+  font-size: 13px;
+  cursor: pointer;
+}
+
+.forgot-password:hover {
+  text-decoration: underline;
+}
+
+.login-button {
+  width: 100%;
+  padding: 13px;
+  border: none;
+  border-radius: 8px;
+  background: #163a24;
+  color: white;
+  font-size: 16px;
+  font-weight: 600;
+  cursor: pointer;
+  transition: background 0.2s, transform 0.1s;
+}
+
+.login-button:hover {
+  background: #245b38;
+}
+
+.login-button:active {
+  transform: translateY(1px);
+}
+
+.login-footer {
+  text-align: center;
+  margin-top: 24px;
+  color: #6b7280;
+  font-size: 12px;
+}
+
+/* Login mobile layout */
+
+@media (max-width: 600px) {
+  .login-page {
+    padding: 18px;
+  }
+
+  .login-card {
+    padding: 26px 20px;
+  }
+
+  .login-header h1 {
+    font-size: 26px;
+  }
+
+  .login-title h2 {
+    font-size: 22px;
+  }
+
+  .login-options {
+    align-items: flex-start;
+  }
+}
+/* =========================================
+   DASHBOARD HEADER + LOGOUT
+   ========================================= */
+
+.dashboard-header-content {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 20px;
+}
+
+.logout-button {
+  border: 1px solid rgba(255, 255, 255, 0.35);
+  background: transparent;
+  color: white;
+  padding: 9px 18px;
+  border-radius: 7px;
+  font-size: 14px;
+  font-weight: 600;
+  cursor: pointer;
+  transition: background 0.2s, border-color 0.2s;
+}
+
+.logout-button:hover {
+  background: rgba(255, 255, 255, 0.12);
+  border-color: rgba(255, 255, 255, 0.6);
+}
+
+@media (max-width: 600px) {
+  .dashboard-header-content {
+    align-items: flex-start;
+  }
+
+  .logout-button {
+    padding: 8px 13px;
+    font-size: 13px;
+  }
+}
+/* =========================================
+   DASHBOARD NAVIGATION
+   ========================================= */
+
+.dashboard-nav {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  margin-top: 20px;
+  padding-top: 16px;
+  border-top: 1px solid rgba(255, 255, 255, 0.18);
+  overflow-x: auto;
+  scrollbar-width: none;
+}
+
+.dashboard-nav::-webkit-scrollbar {
+  display: none;
+}
+
+.dashboard-nav button {
+  flex-shrink: 0;
+  border: 1px solid rgba(255, 255, 255, 0.3);
+  background: rgba(255, 255, 255, 0.08);
+  color: white;
+  padding: 9px 15px;
+  border-radius: 7px;
+  font-size: 13px;
+  font-weight: 600;
+  cursor: pointer;
+  transition: background 0.2s, border-color 0.2s;
+}
+
+.dashboard-nav button:hover {
+  background: rgba(255, 255, 255, 0.18);
+  border-color: rgba(255, 255, 255, 0.55);
+}
+
+/* Keep navigation usable on mobile */
+
+@media (max-width: 600px) {
+  .dashboard-nav {
+    gap: 8px;
+    margin-top: 16px;
+  }
+
+  .dashboard-nav button {
+    padding: 8px 12px;
+    font-size: 12px;
+  }
+}
+
+
+/* =========================================================
+   GIS & GEOSPATIAL VISUALIZATION EXTENSIONS
+   ========================================================= */
+
+/* Header GIS pill & validation */
+.title-row {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  flex-wrap: wrap;
+}
+
+.header-gis-pill {
+  background: rgba(34, 197, 94, 0.2);
+  color: #86efac;
+  border: 1px solid rgba(74, 222, 128, 0.4);
+  padding: 3px 10px;
+  border-radius: 9999px;
+  font-size: 12px;
+  font-weight: 600;
+  letter-spacing: 0.5px;
+}
+
+.header-actions {
+  display: flex;
+  align-items: center;
+  gap: 16px;
+}
+
+.validation-status-tag {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  background: rgba(255, 255, 255, 0.12);
+  padding: 6px 12px;
+  border-radius: 20px;
+  font-size: 12px;
+  font-weight: 600;
+  color: #dcfce7;
+  border: 1px solid rgba(255, 255, 255, 0.2);
+}
+
+.green-circle {
+  width: 8px;
+  height: 8px;
+  background: #22c55e;
+  border-radius: 50%;
+  box-shadow: 0 0 8px #22c55e;
+}
+
+.card-header-flex {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
+  margin-bottom: 16px;
+  flex-wrap: wrap;
+  gap: 12px;
+}
+
+.card-subtitle {
+  font-size: 14px;
+  color: #6b7280;
+  margin-top: 2px;
+}
+
+.card-header-badge {
+  background: #f0fdf4;
+  border: 1px solid #bbf7d0;
+  padding: 6px 14px;
+  border-radius: 8px;
+  font-size: 13px;
+  color: #166534;
+}
+
+/* GIS Toolbar */
+.farm-map-wrapper {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+
+.gis-toolbar {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  background: #f8fafc;
+  padding: 10px 16px;
+  border-radius: 8px;
+  border: 1px solid #e2e8f0;
+  flex-wrap: wrap;
+  gap: 10px;
+}
+
+.gis-toolbar-left {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  flex-wrap: wrap;
+}
+
+.gis-badge {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  font-size: 12px;
+  color: #334155;
+  background: #ffffff;
+  padding: 4px 10px;
+  border-radius: 6px;
+  border: 1px solid #cbd5e1;
+}
+
+.gis-badge.accuracy {
+  background: #ecfdf5;
+  color: #065f46;
+  border-color: #a7f3d0;
+}
+
+.gis-badge.farm-size {
+  background: #eff6ff;
+  color: #1e40af;
+  border-color: #bfdbfe;
+}
+
+.live-dot {
+  width: 7px;
+  height: 7px;
+  border-radius: 50%;
+  background: #10b981;
+  animation: pulse-ring 2s infinite;
+}
+
+.gis-toolbar-right {
+  display: flex;
+  align-items: center;
+  gap: 14px;
+}
+
+.toggle-label {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  font-size: 13px;
+  color: #1e293b;
+  font-weight: 500;
+  cursor: pointer;
+}
+
+.toggle-label input[type="checkbox"] {
+  accent-color: #16a34a;
+  cursor: pointer;
+}
+
+/* Camera Navigation Overlay Controls */
+.gis-camera-controls {
+  position: absolute;
+  top: 14px;
+  left: 60px;
+  z-index: 1000;
+  display: flex;
+  gap: 8px;
+}
+
+.gis-ctrl-btn {
+  background: white;
+  border: 1px solid #cbd5e1;
+  padding: 8px 14px;
+  border-radius: 6px;
+  font-size: 12px;
+  font-weight: 600;
+  color: #1e293b;
+  cursor: pointer;
+  box-shadow: 0 2px 6px rgba(0,0,0,0.12);
+  transition: all 0.2s ease;
+}
+
+.gis-ctrl-btn:hover {
+  background: #f1f5f9;
+  border-color: #94a3b8;
+}
+
+.gis-ctrl-btn.focus-hotspot {
+  background: #fef2f2;
+  border-color: #fca5a5;
+  color: #b91c1c;
+}
+
+.gis-ctrl-btn.focus-hotspot:hover {
+  background: #fee2e2;
+}
+
+/* Custom Pulsing Outbreak Marker */
+.custom-outbreak-marker {
+  position: relative;
+}
+
+.pulse-marker-ring {
+  position: absolute;
+  width: 32px;
+  height: 32px;
+  border-radius: 50%;
+  border: 2px solid #ef4444;
+  top: 2px;
+  left: 2px;
+  animation: marker-pulse 1.8s infinite;
+}
+
+.pulse-marker-center {
+  width: 36px;
+  height: 36px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 18px;
+  background: white;
+  border: 2px solid #dc2626;
+  border-radius: 50%;
+  box-shadow: 0 0 10px rgba(220, 38, 38, 0.4);
+}
+
+@keyframes marker-pulse {
+  0% {
+    transform: scale(0.8);
+    opacity: 0.9;
+  }
+  70% {
+    transform: scale(2.2);
+    opacity: 0;
+  }
+  100% {
+    transform: scale(2.4);
+    opacity: 0;
+  }
+}
+
+@keyframes pulse-ring {
+  0% { transform: scale(0.95); box-shadow: 0 0 0 0 rgba(16, 185, 129, 0.7); }
+  70% { transform: scale(1); box-shadow: 0 0 0 6px rgba(16, 185, 129, 0); }
+  100% { transform: scale(0.95); box-shadow: 0 0 0 0 rgba(16, 185, 129, 0); }
+}
+
+/* Legend Header & Validation */
+.legend-header {
+  border-bottom: 1px solid #e5e7eb;
+  padding-bottom: 6px;
+  margin-bottom: 8px;
+}
+
+.legend-validation-badge {
+  display: inline-block;
+  font-size: 10px;
+  color: #059669;
+  font-weight: 700;
+  background: #ecfdf5;
+  padding: 2px 6px;
+  border-radius: 4px;
+  margin-top: 4px;
+}
+
+.legend-footer {
+  margin-top: 8px;
+  padding-top: 6px;
+  border-top: 1px solid #e5e7eb;
+  color: #64748b;
+}
+
+/* =========================================================
+   TIMELINE PROGRESSION SLIDER (WEEK 4 MILESTONE)
+   ========================================================= */
+
+.timeline-container {
+  background: #ffffff;
+  border: 1px solid #e2e8f0;
+  border-radius: 10px;
+  padding: 16px 20px;
+  margin-top: 10px;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.04);
+}
+
+.timeline-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 16px;
+}
+
+.timeline-tag {
+  font-size: 11px;
+  font-weight: 700;
+  text-transform: uppercase;
+  color: #0284c7;
+  background: #e0f2fe;
+  padding: 2px 8px;
+  border-radius: 4px;
+  letter-spacing: 0.5px;
+}
+
+.timeline-title-group h3 {
+  font-size: 16px;
+  color: #1e293b;
+  margin-top: 4px;
+}
+
+.timeline-play-btn {
+  background: #166534;
+  color: white;
+  border: none;
+  padding: 8px 16px;
+  border-radius: 6px;
+  font-weight: 600;
+  font-size: 13px;
+  cursor: pointer;
+  transition: all 0.2s ease;
+}
+
+.timeline-play-btn:hover {
+  background: #14532d;
+}
+
+.timeline-play-btn.playing {
+  background: #dc2626;
+}
+
+.timeline-track-wrapper {
+  position: relative;
+  padding: 20px 10px 10px 10px;
+}
+
+.timeline-track {
+  position: relative;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  height: 6px;
+  background: #e2e8f0;
+  border-radius: 3px;
+}
+
+.timeline-track-fill {
+  position: absolute;
+  top: 0;
+  left: 0;
+  height: 100%;
+  background: linear-gradient(90deg, #22c55e, #f97316, #ef4444);
+  border-radius: 3px;
+  transition: width 0.3s ease;
+  z-index: 1;
+}
+
+.timeline-node {
+  position: relative;
+  z-index: 2;
+  background: none;
+  border: none;
+  cursor: pointer;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  outline: none;
+}
+
+.node-dot {
+  width: 18px;
+  height: 18px;
+  border-radius: 50%;
+  border: 3px solid white;
+  box-shadow: 0 0 0 2px #cbd5e1;
+  transition: all 0.2s ease;
+}
+
+.timeline-node.active .node-dot {
+  transform: scale(1.35);
+  box-shadow: 0 0 0 3px #1e293b;
+}
+
+.timeline-node.today .node-dot {
+  border-color: #fef08a;
+  box-shadow: 0 0 0 3px #ef4444;
+}
+
+.node-label {
+  font-size: 12px;
+  font-weight: 600;
+  color: #475569;
+  margin-top: 8px;
+  white-space: nowrap;
+}
+
+.timeline-node.active .node-label {
+  color: #0f172a;
+  font-weight: 700;
+}
+
+.node-date {
+  font-size: 10px;
+  color: #94a3b8;
+  white-space: nowrap;
+}
+
+/* Timeline Active Card Details */
+.timeline-details-card {
+  margin-top: 18px;
+  background: #f8fafc;
+  border-radius: 8px;
+  padding: 14px 18px;
+  border: 1px solid #e2e8f0;
+}
+
+.detail-status-pill {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  padding: 4px 12px;
+  border-radius: 20px;
+  font-size: 13px;
+  border: 1px solid;
+  margin-bottom: 10px;
+}
+
+.pulsing-indicator {
+  width: 8px;
+  height: 8px;
+  border-radius: 50%;
+}
+
+.detail-metrics {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
+  gap: 12px;
+  margin: 10px 0;
+}
+
+.detail-item {
+  background: white;
+  padding: 8px 12px;
+  border-radius: 6px;
+  border: 1px solid #edf2f7;
+  display: flex;
+  flex-direction: column;
+}
+
+.detail-item span {
+  font-size: 11px;
+  color: #64748b;
+  margin-bottom: 2px;
+}
+
+.detail-item strong {
+  font-size: 14px;
+  color: #1e293b;
+}
+
+.detail-desc {
+  font-size: 13px;
+  color: #475569;
+  line-height: 1.5;
+  margin-top: 8px;
+}
+
+.status-green { color: #16a34a !important; }
+.status-danger { color: #dc2626 !important; }
+
+/* =========================================================
+   SPECTRAL ANALYTICS PANEL (WEEK 3 MILESTONE)
+   ========================================================= */
+
+.analytics-card {
+  background: white;
+  border-radius: 12px;
+  padding: 24px;
+  box-shadow: 0 4px 16px rgba(0, 0, 0, 0.08);
+  margin-top: 24px;
+}
+
+.analytics-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
+  margin-bottom: 20px;
+  flex-wrap: wrap;
+  gap: 14px;
+}
+
+.analytics-tag {
+  font-size: 11px;
+  font-weight: 700;
+  text-transform: uppercase;
+  color: #7c3aed;
+  background: #f5f3ff;
+  padding: 2px 8px;
+  border-radius: 4px;
+}
+
+.analytics-header h2 {
+  font-size: 24px;
+  color: #1f2937;
+  margin: 4px 0 2px 0;
+}
+
+.analytics-header p {
+  font-size: 14px;
+  color: #6b7280;
+}
+
+.lead-time-badge {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  background: #fef2f2;
+  border: 1px solid #fecaca;
+  padding: 8px 14px;
+  border-radius: 8px;
+}
+
+.badge-icon {
+  font-size: 20px;
+}
+
+.lead-time-badge strong {
+  display: block;
+  font-size: 14px;
+  color: #b91c1c;
+}
+
+.lead-time-badge span {
+  font-size: 11px;
+  color: #dc2626;
+}
+
+/* Acreage Summary Grid */
+.acreage-summary-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+  gap: 16px;
+  margin-bottom: 16px;
+}
+
+.acreage-stat {
+  background: #f8fafc;
+  padding: 16px;
+  border-radius: 10px;
+  border: 1px solid #e2e8f0;
+  display: flex;
+  flex-direction: column;
+}
+
+.acreage-stat.critical {
+  background: #fff5f5;
+  border-color: #fed7d7;
+}
+
+.acreage-stat.moderate {
+  background: #fffbeb;
+  border-color: #fef3c7;
+}
+
+.acreage-stat.healthy {
+  background: #f0fdf4;
+  border-color: #bbf7d0;
+}
+
+.stat-label {
+  font-size: 12px;
+  color: #64748b;
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+}
+
+.stat-value {
+  font-size: 28px;
+  font-weight: 800;
+  color: #0f172a;
+  margin: 4px 0;
+}
+
+.acreage-stat.critical .stat-value {
+  color: #dc2626;
+}
+
+.stat-unit {
+  font-size: 12px;
+  color: #64748b;
+}
+
+.stat-alert {
+  margin-top: 6px;
+  font-size: 11px;
+  font-weight: 700;
+  color: #b91c1c;
+  background: #fee2e2;
+  padding: 2px 6px;
+  border-radius: 4px;
+  width: fit-content;
+}
+
+/* Proportional Acreage Bar */
+.acreage-bar-wrapper {
+  margin: 16px 0 24px 0;
+}
+
+.acreage-bar {
+  display: flex;
+  height: 14px;
+  background: #e2e8f0;
+  border-radius: 7px;
+  overflow: hidden;
+}
+
+.bar-critical { background: #ef4444; min-width: 4px; }
+.bar-moderate { background: #f59e0b; }
+.bar-healthy { background: #22c55e; }
+
+.acreage-savings-callout {
+  display: flex;
+  align-items: flex-start;
+  gap: 10px;
+  background: #ecfdf5;
+  border: 1px solid #a7f3d0;
+  border-radius: 8px;
+  padding: 12px 16px;
+  margin-top: 12px;
+  font-size: 13px;
+  color: #065f46;
+  line-height: 1.5;
+}
+
+.savings-icon {
+  font-size: 18px;
+}
+
+/* Chemical Anomalies Section */
+.chemical-anomalies-section {
+  margin-top: 24px;
+}
+
+.chemical-anomalies-section h3 {
+  font-size: 18px;
+  color: #1e293b;
+  margin-bottom: 14px;
+}
+
+.chemical-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+  gap: 16px;
+}
+
+.chemical-card {
+  background: #f8fafc;
+  border-radius: 8px;
+  padding: 16px;
+  border: 1px solid #e2e8f0;
+  border-left: 4px solid;
+}
+
+.chemical-card.alert { border-left-color: #ef4444; background: #fef2f2; }
+.chemical-card.warning { border-left-color: #f59e0b; background: #fffbeb; }
+.chemical-card.info { border-left-color: #3b82f6; background: #eff6ff; }
+.chemical-card.secondary { border-left-color: #8b5cf6; background: #f5f3ff; }
+
+.chemical-card-header {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  margin-bottom: 8px;
+}
+
+.chem-icon {
+  font-size: 18px;
+}
+
+.chemical-card-header h4 {
+  font-size: 14px;
+  font-weight: 700;
+  color: #1e293b;
+}
+
+.chem-stat-row {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 8px;
+}
+
+.chem-delta {
+  font-size: 20px;
+  font-weight: 800;
+  color: #0f172a;
+}
+
+.chemical-card.alert .chem-delta { color: #dc2626; }
+.chemical-card.warning .chem-delta { color: #d97706; }
+.chemical-card.info .chem-delta { color: #2563eb; }
+.chemical-card.secondary .chem-delta { color: #7c3aed; }
+
+.chem-band {
+  font-size: 11px;
+  font-weight: 600;
+  color: #64748b;
+  background: white;
+  padding: 2px 6px;
+  border-radius: 4px;
+  border: 1px solid #cbd5e1;
+}
+
+.chemical-card p {
+  font-size: 12px;
+  color: #475569;
+  line-height: 1.4;
+}
+
+/* Spectral Curve Section */
+.spectral-curve-section {
+  margin-top: 28px;
+  background: #f8fafc;
+  border: 1px solid #e2e8f0;
+  border-radius: 10px;
+  padding: 18px 20px;
+}
+
+.spectral-curve-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
+  margin-bottom: 12px;
+  flex-wrap: wrap;
+  gap: 10px;
+}
+
+.spectral-curve-header h3 {
+  font-size: 16px;
+  color: #1e293b;
+}
+
+.spectral-curve-header p {
+  font-size: 12px;
+  color: #64748b;
+}
+
+.spectral-legend {
+  display: flex;
+  gap: 14px;
+  font-size: 12px;
+  font-weight: 500;
+  color: #334155;
+  flex-wrap: wrap;
+}
+
+.spectral-legend .dot {
+  display: inline-block;
+  width: 10px;
+  height: 10px;
+  border-radius: 50%;
+  margin-right: 4px;
+}
+
+.legend-healthy .dot { background: #22c55e; }
+.legend-infected .dot { background: #ef4444; }
+.legend-critical-band .dot { background: #fca5a5; }
+
+.svg-chart-container {
+  width: 100%;
+  overflow-x: auto;
+}
+
+.spectral-svg {
+  width: 100%;
+  max-width: 800px;
+  height: auto;
+  display: block;
+  margin: 0 auto;
+}
+
+.spectral-note {
+  margin-top: 12px;
+  font-size: 12px;
+  color: #475569;
+  background: #ffffff;
+  padding: 10px 14px;
+  border-radius: 6px;
+  border: 1px solid #e2e8f0;
+  line-height: 1.5;
+}
+
+/* Status colors */
+.status-critical { color: #dc2626 !important; }
+.status-warning { color: #d97706 !important; }
+.status-lead { color: #7c3aed !important; }
+
+/* Critical Alert styling */
+.alert-critical {
+  border-left: 4px solid #ef4444;
+  background: #fef2f2 !important;
+}
+
+.alert-title-row {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  flex-wrap: wrap;
+  gap: 8px;
+  margin-bottom: 6px;
+}
+
+.alert-urgent-tag {
+  font-size: 11px;
+  font-weight: 800;
+  background: #dc2626;
+  color: white;
+  padding: 2px 8px;
+  border-radius: 4px;
+  letter-spacing: 0.5px;
+}
+
+.alert-meta-row {
+  display: flex;
+  gap: 12px;
+  margin-top: 8px;
+  flex-wrap: wrap;
+  align-items: center;
+}
+
+.alert-meta-tag {
+  font-size: 11px;
+  background: white;
+  border: 1px solid #fecaca;
+  color: #991b1b;
+  padding: 2px 8px;
+  border-radius: 4px;
+  font-weight: 600;
+}
+/* =========================================================
+   GLOBAL RESET
+   ========================================================= */
+
+* {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+html {
+  scroll-behavior: smooth;
+}
+
+body {
+  font-family: Arial, sans-serif;
+  background: #f4f7f4;
+  color: #1f2937;
+}
+
+#root {
+  min-height: 100vh;
+}
+
+
+/* =========================================================
+   DASHBOARD
+   ========================================================= */
+
+.dashboard {
+  min-height: 100vh;
+}
+
+
+/* =========================================================
+   HEADER
+   ========================================================= */
+
+.dashboard-header {
+  padding: 24px 40px;
+  background: #163a24;
+  color: white;
+}
+
+.dashboard-header h1 {
+  font-size: 30px;
+  margin-bottom: 6px;
+  font-weight: 700;
+}
+
+.dashboard-header p {
+  font-size: 16px;
+  opacity: 0.85;
+}
+
+
+/* =========================================================
+   DASHBOARD CONTENT
+   ========================================================= */
+
+.dashboard-content {
+  padding: 30px;
+  max-width: 1800px;
+  margin: 0 auto;
+}
+
+
+/* =========================================================
+   FARM MAP CARD
+   ========================================================= */
+
+.map-card {
+  background: white;
+  border-radius: 12px;
+  padding: 24px;
+  box-shadow: 0 4px 16px rgba(0, 0, 0, 0.08);
+}
+
+.map-card h2 {
+  margin-bottom: 20px;
+  font-size: 26px;
+  color: #1f2937;
+}
+
+
+/* =========================================================
+   MAP CONTAINER
+   ========================================================= */
+
+.map-container {
+  width: 100%;
+  height: 500px;
+  overflow: hidden;
+  border-radius: 12px;
+  position: relative;
+}
+
+.farm-map {
+  width: 100%;
+  height: 100%;
+  position: relative;
+}
+
+
+/* =========================================================
+   LEAFLET MAP
+   ========================================================= */
+
+.farm-map .leaflet-container {
+  width: 100%;
+  height: 100%;
+}
+
+
+/* =========================================================
+   ZOOM CONTROLS
+   ========================================================= */
+
+/*
+   Leaflet's default zoom controls stay at the
+   top-left. We give them enough space so that
+   custom controls don't overlap them.
+*/
+
+.farm-map .leaflet-control-zoom {
+  margin-top: 10px !important;
+  margin-left: 10px !important;
+  border: none !important;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.18);
+}
+
+.farm-map .leaflet-control-zoom a {
+  width: 36px !important;
+  height: 34px !important;
+  line-height: 32px !important;
+  font-size: 20px !important;
+  color: #1f2937 !important;
+  background: white !important;
+}
+
+.farm-map .leaflet-control-zoom a:hover {
+  background: #f4f7f4 !important;
+}
+
+
+/* =========================================================
+   CENTER FARM BUTTON
+   ========================================================= */
+
+.center-farm-control {
+  position: absolute;
+  top: 85px;
+  left: 10px;
+  z-index: 1000;
+}
+
+.center-farm-control button {
+  background: white;
+  border: 1px solid #d1d5db;
+  border-radius: 7px;
+  padding: 9px 13px;
+  font-size: 14px;
+  font-weight: 600;
+  color: #1f2937;
+  cursor: pointer;
+  white-space: nowrap;
+
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.18);
+
+  transition:
+    background 0.2s ease,
+    transform 0.2s ease,
+    box-shadow 0.2s ease;
+}
+
+.center-farm-control button:hover {
+  background: #f1f5f2;
+  transform: translateY(-1px);
+  box-shadow: 0 3px 10px rgba(0, 0, 0, 0.2);
+}
+
+.center-farm-control button:active {
+  transform: translateY(0);
+}
+
+
+/* =========================================================
+   HEATMAP TOGGLE
+   ========================================================= */
+
+.heatmap-toggle {
+  position: absolute;
+  top: 135px;
+  left: 10px;
+  z-index: 1000;
+}
+
+.heatmap-toggle button {
+  background: white;
+  border: 1px solid #d1d5db;
+  border-radius: 7px;
+  padding: 9px 13px;
+  font-size: 14px;
+  font-weight: 600;
+  color: #1f2937;
+  cursor: pointer;
+  white-space: nowrap;
+
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.18);
+
+  transition:
+    background 0.2s ease,
+    transform 0.2s ease,
+    box-shadow 0.2s ease;
+}
+
+.heatmap-toggle button:hover {
+  background: #f1f5f2;
+  transform: translateY(-1px);
+  box-shadow: 0 3px 10px rgba(0, 0, 0, 0.2);
+}
+
+.heatmap-toggle button:active {
+  transform: translateY(0);
+}
+
+
+/* =========================================================
+   CROP HEALTH LEGEND
+   ========================================================= */
+
+/*
+   The legend is deliberately placed at the
+   bottom-left so it does not interfere with:
+   - Zoom controls
+   - Center Farm
+   - Heatmap toggle
+*/
+
+.heatmap-legend {
+  position: absolute;
+  left: 10px;
+  bottom: 20px;
+  z-index: 1000;
+
+  min-width: 165px;
+
+  background: rgba(255, 255, 255, 0.97);
+
+  padding: 14px 16px;
+
+  border-radius: 10px;
+
+  border: 1px solid #e5e7eb;
+
+  box-shadow: 0 3px 12px rgba(0, 0, 0, 0.2);
+
+  font-size: 13px;
+  line-height: 1.6;
+}
+
+.heatmap-legend h4 {
+  margin: 0 0 10px 0;
+
+  font-size: 15px;
+  font-weight: 700;
+
+  color: #1f2937;
+}
+
+.legend-item {
+  display: flex;
+  align-items: center;
+
+  gap: 8px;
+
+  margin: 5px 0;
+
+  color: #374151;
+}
+
+.legend-color {
+  width: 14px;
+  height: 14px;
+
+  border-radius: 50%;
+
+  display: inline-block;
+
+  flex-shrink: 0;
+
+  border: 1px solid rgba(0, 0, 0, 0.08);
+}
+
+.legend-green {
+  background: #16a34a;
+}
+
+.legend-yellow {
+  background: #facc15;
+}
+
+.legend-orange {
+  background: #f97316;
+}
+
+.legend-red {
+  background: #ef4444;
+}
+
+
+/* =========================================================
+   LEAFLET LAYER CONTROL
+   ========================================================= */
+
+.farm-map .leaflet-control-layers {
+  margin-top: 10px !important;
+  margin-right: 10px !important;
+
+  border-radius: 8px !important;
+
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.18);
+
+  border: 1px solid #d1d5db;
+}
+
+.farm-map .leaflet-control-layers-toggle {
+  width: 44px;
+  height: 44px;
+}
+
+.farm-map .leaflet-control-layers-expanded {
+  padding: 10px;
+  background: white;
+}
+
+
+/* =========================================================
+   LEAFLET POPUPS
+   ========================================================= */
+
+.farm-map .leaflet-popup-content-wrapper {
+  border-radius: 9px;
+}
+
+.farm-map .leaflet-popup-content {
+  font-size: 14px;
+  line-height: 1.5;
+}
+
+.farm-map .leaflet-popup-content strong {
+  color: #163a24;
+}
+
+
+/* =========================================================
+   FARM INFORMATION CARD
+   ========================================================= */
+
+.farm-info-card {
+  margin-top: 30px;
+
+  background: white;
+
+  border-radius: 12px;
+
+  padding: 24px;
+
+  box-shadow: 0 4px 16px rgba(0, 0, 0, 0.08);
+}
+
+.farm-info-card h2 {
+  margin-bottom: 20px;
+
+  font-size: 26px;
+
+  color: #1f2937;
+}
+
+.farm-info-grid {
+  display: grid;
+
+  grid-template-columns: repeat(3, 1fr);
+
+  gap: 18px;
+}
+
+.info-item {
+  background: #f4f7f4;
+
+  border-radius: 10px;
+
+  padding: 18px;
+
+  border: 1px solid #e0e7e1;
+}
+
+.info-item span {
+  display: block;
+
+  color: #53665a;
+
+  font-size: 14px;
+
+  margin-bottom: 7px;
+}
+
+.info-item strong {
+  display: block;
+
+  font-size: 18px;
+
+  color: #1f2937;
+}
+
+.status-healthy {
+  color: #16803c !important;
+}
+
+
+/* =========================================================
+   CROP HEALTH CARD
+   ========================================================= */
+
+.crop-health-card {
+  margin-top: 30px;
+
+  background: white;
+
+  border-radius: 12px;
+
+  padding: 24px;
+
+  box-shadow: 0 4px 16px rgba(0, 0, 0, 0.08);
+}
+
+.crop-health-card h2 {
+  margin-bottom: 20px;
+
+  font-size: 26px;
+
+  color: #1f2937;
+}
+
+.crop-health-grid {
+  display: grid;
+
+  grid-template-columns: repeat(5, 1fr);
+
+  gap: 18px;
+}
+
+.health-item {
+  background: #f4f7f4;
+
+  border-radius: 10px;
+
+  padding: 18px;
+
+  border: 1px solid #e0e7e1;
+}
+
+.health-item span {
+  display: block;
+
+  color: #53665a;
+
+  font-size: 14px;
+
+  margin-bottom: 7px;
+}
+
+.health-item strong {
+  display: block;
+
+  font-size: 22px;
+
+  color: #1f2937;
+}
+
+.health-item .status-healthy {
+  color: #16803c !important;
+}
+
+
+/* =========================================================
+   FARM OVERVIEW
+   ========================================================= */
+
+.farm-overview {
+  margin-top: 24px;
+
+  padding-top: 24px;
+
+  border-top: 1px solid #e5e7eb;
+}
+
+.farm-overview h2 {
+  margin-bottom: 16px;
+}
+
+.overview-grid {
+  display: grid;
+
+  grid-template-columns: repeat(5, 1fr);
+
+  gap: 16px;
+}
+
+.overview-item {
+  padding: 18px;
+
+  background: #f4f7f4;
+
+  border-radius: 10px;
+
+  border: 1px solid #e0e7e1;
+}
+
+.overview-item span {
+  display: block;
+
+  font-size: 14px;
+
+  color: #53665a;
+
+  margin-bottom: 8px;
+}
+
+.overview-item strong {
+  display: block;
+
+  font-size: 17px;
+
+  color: #163a24;
+}
+
+
+/* =========================================================
+   RESPONSIVE - TABLET
+   ========================================================= */
+
+@media (max-width: 1000px) {
+
+  .dashboard-content {
+    padding: 24px;
+  }
+
+  .farm-info-grid {
+    grid-template-columns: repeat(2, 1fr);
+  }
+
+  .crop-health-grid {
+    grid-template-columns: repeat(2, 1fr);
+  }
+
+  .overview-grid {
+    grid-template-columns: repeat(2, 1fr);
+  }
+}
+
+
+/* =========================================================
+   RESPONSIVE - MOBILE
+   ========================================================= */
+
+@media (max-width: 600px) {
+
+  .dashboard-header {
+    padding: 20px;
+  }
+
+  .dashboard-header h1 {
+    font-size: 26px;
+  }
+
+  .dashboard-header p {
+    font-size: 14px;
+  }
+
+  .dashboard-content {
+    padding: 15px;
+  }
+
+  .map-card,
+  .farm-info-card,
+  .crop-health-card {
+    padding: 16px;
+  }
+
+  .map-card h2,
+  .farm-info-card h2,
+  .crop-health-card h2 {
+    font-size: 22px;
+  }
+
+  .map-container {
+    height: 450px;
+  }
+
+  .farm-info-grid,
+  .crop-health-grid,
+  .overview-grid {
+    grid-template-columns: 1fr;
+  }
+
+  /*
+     Keep controls separated on small screens.
+  */
+
+  .center-farm-control {
+    top: 80px;
+    left: 8px;
+  }
+
+  .heatmap-toggle {
+    top: 130px;
+    left: 8px;
+  }
+
+  .heatmap-legend {
+    left: 8px;
+    bottom: 12px;
+
+    min-width: 145px;
+
+    padding: 11px 13px;
+
+    font-size: 12px;
+  }
+
+  .heatmap-legend h4 {
+    font-size: 14px;
+  }
+
+  .farm-map .leaflet-control-zoom {
+    margin-left: 8px !important;
+  }
+
+  .farm-map .leaflet-control-layers {
+    margin-right: 8px !important;
+  }
+}
+
+
+/* =========================================================
+   VERY SMALL SCREENS
+   ========================================================= */
+
+@media (max-width: 400px) {
+
+  .map-container {
+    height: 400px;
+  }
+
+  .center-farm-control button,
+  .heatmap-toggle button {
+    font-size: 13px;
+    padding: 8px 10px;
+  }
+
+  .heatmap-legend {
+    min-width: 135px;
+  }
+}
+/* =========================================================
+   CROP HEALTH TREND
+   ========================================================= */
+
+.trend-card {
+  margin-top: 30px;
+  background: white;
+  border-radius: 12px;
+  padding: 24px;
+  box-shadow: 0 4px 16px rgba(0, 0, 0, 0.08);
+}
+
+.trend-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 24px;
+}
+
+.trend-header h2 {
+  font-size: 26px;
+  color: #1f2937;
+  margin-bottom: 6px;
+}
+
+.trend-header p {
+  color: #53665a;
+  font-size: 14px;
+}
+
+.trend-current {
+  text-align: right;
+}
+
+.trend-current span {
+  display: block;
+  color: #53665a;
+  font-size: 13px;
+  margin-bottom: 4px;
+}
+
+.trend-current strong {
+  font-size: 28px;
+  color: #16803c;
+}
+
+
+/* Chart */
+
+.trend-chart {
+  display: flex;
+  width: 100%;
+  height: 300px;
+}
+
+.chart-y-axis {
+  width: 45px;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  padding-bottom: 32px;
+  color: #6b7280;
+  font-size: 12px;
+  text-align: right;
+  padding-right: 10px;
+}
+
+.chart-area {
+  position: relative;
+  flex: 1;
+  height: 100%;
+  border-left: 1px solid #d1d5db;
+  border-bottom: 1px solid #d1d5db;
+}
+
+
+/* Horizontal grid lines */
+
+.chart-grid-line {
+  position: absolute;
+  left: 0;
+  right: 0;
+  height: 1px;
+  background: #e5e7eb;
+}
+
+.line-1 {
+  top: 8%;
+}
+
+.line-2 {
+  top: 26%;
+}
+
+.line-3 {
+  top: 44%;
+}
+
+.line-4 {
+  top: 62%;
+}
+
+.line-5 {
+  top: 80%;
+}
+
+
+/* Trend line */
+
+.trend-line {
+  position: absolute;
+  left: 5%;
+  right: 5%;
+  top: 8%;
+  height: 72%;
+}
+
+
+/*
+   The line is represented using a clipped polygon.
+*/
+
+.trend-line::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+
+  background: #16803c;
+
+  clip-path: polygon(
+    0% 62%,
+    16% 48%,
+    33% 54%,
+    50% 35%,
+    66% 40%,
+    83% 24%,
+    100% 30%,
+    100% 33%,
+    83% 27%,
+    66% 43%,
+    50% 38%,
+    33% 57%,
+    16% 51%,
+    0% 65%
+  );
+}
+
+
+/* Chart points */
+
+.chart-point {
+  position: absolute;
+
+  width: 10px;
+  height: 10px;
+
+  background: white;
+
+  border: 3px solid #16803c;
+
+  border-radius: 50%;
+
+  transform: translate(-50%, -50%);
+
+  z-index: 2;
+}
+
+.point-1 {
+  left: 0%;
+  top: 63%;
+}
+
+.point-2 {
+  left: 16.6%;
+  top: 49%;
+}
+
+.point-3 {
+  left: 33.3%;
+  top: 55%;
+}
+
+.point-4 {
+  left: 50%;
+  top: 36%;
+}
+
+.point-5 {
+  left: 66.6%;
+  top: 41%;
+}
+
+.point-6 {
+  left: 83.3%;
+  top: 25%;
+}
+
+.point-7 {
+  left: 100%;
+  top: 31%;
+}
+
+
+/* Day labels */
+
+.chart-labels {
+  position: absolute;
+  left: 0;
+  right: 0;
+  bottom: -30px;
+
+  display: flex;
+  justify-content: space-between;
+
+  color: #6b7280;
+
+  font-size: 12px;
+}
+
+
+/* =========================================================
+   FARM MONITORING
+   ========================================================= */
+
+.status-card {
+  margin-top: 30px;
+
+  background: white;
+
+  border-radius: 12px;
+
+  padding: 24px;
+
+  box-shadow: 0 4px 16px rgba(0, 0, 0, 0.08);
+}
+
+.status-card h2 {
+  margin-bottom: 20px;
+
+  font-size: 26px;
+
+  color: #1f2937;
+}
+
+.status-grid {
+  display: grid;
+
+  grid-template-columns: repeat(4, 1fr);
+
+  gap: 18px;
+}
+
+.monitor-item {
+  display: flex;
+
+  align-items: center;
+
+  gap: 14px;
+
+  background: #f4f7f4;
+
+  border-radius: 10px;
+
+  padding: 18px;
+
+  border: 1px solid #e0e7e1;
+}
+
+.monitor-icon {
+  width: 14px;
+  height: 14px;
+
+  border-radius: 50%;
+
+  flex-shrink: 0;
+}
+
+.healthy-dot {
+  background: #16a34a;
+}
+
+.warning-dot {
+  background: #f59e0b;
+}
+
+.monitor-item span {
+  display: block;
+
+  color: #53665a;
+
+  font-size: 13px;
+
+  margin-bottom: 5px;
+}
+
+.monitor-item strong {
+  display: block;
+
+  color: #1f2937;
+
+  font-size: 17px;
+}
+
+
+/* =========================================================
+   RESPONSIVE TREND
+   ========================================================= */
+
+@media (max-width: 1000px) {
+
+  .status-grid {
+    grid-template-columns: repeat(2, 1fr);
+  }
+
+}
+
+
+@media (max-width: 600px) {
+
+  .trend-card,
+  .status-card {
+    padding: 16px;
+  }
+
+  .trend-header {
+    align-items: flex-start;
+    gap: 15px;
+  }
+
+  .trend-header h2,
+  .status-card h2 {
+    font-size: 22px;
+  }
+
+  .trend-current strong {
+    font-size: 22px;
+  }
+
+  .trend-chart {
+    height: 240px;
+  }
+
+  .status-grid {
+    grid-template-columns: 1fr;
+  }
+
+}
+/* =========================================================
+   ALERTS & RECOMMENDATIONS
+   ========================================================= */
+
+.alerts-card {
+  margin-top: 30px;
+
+  background: white;
+
+  border-radius: 12px;
+
+  padding: 24px;
+
+  box-shadow: 0 4px 16px rgba(0, 0, 0, 0.08);
+}
+
+
+/* Header */
+
+.alerts-header {
+  display: flex;
+
+  align-items: center;
+
+  justify-content: space-between;
+
+  gap: 20px;
+
+  margin-bottom: 20px;
+}
+
+.alerts-header h2 {
+  font-size: 26px;
+
+  color: #1f2937;
+
+  margin-bottom: 6px;
+}
+
+.alerts-header p {
+  color: #53665a;
+
+  font-size: 14px;
+}
+
+
+/* Alert count */
+
+.alert-count {
+  background: #fff7ed;
+
+  color: #c2410c;
+
+  border: 1px solid #fed7aa;
+
+  padding: 7px 12px;
+
+  border-radius: 20px;
+
+  font-size: 13px;
+
+  font-weight: 600;
+
+  white-space: nowrap;
+}
+
+
+/* Alert list */
+
+.alerts-list {
+  display: flex;
+
+  flex-direction: column;
+
+  gap: 14px;
+}
+
+
+/* Individual alert */
+
+.alert-item {
+  display: flex;
+
+  align-items: flex-start;
+
+  gap: 16px;
+
+  padding: 18px;
+
+  border-radius: 10px;
+
+  border: 1px solid;
+}
+
+
+/* Warning alert */
+
+.alert-warning {
+  background: #fffaf0;
+
+  border-color: #fde68a;
+}
+
+
+/* Information alert */
+
+.alert-info {
+  background: #f0fdf4;
+
+  border-color: #bbf7d0;
+}
+
+
+/* Alert icon */
+
+.alert-icon {
+  width: 40px;
+
+  height: 40px;
+
+  display: flex;
+
+  align-items: center;
+
+  justify-content: center;
+
+  flex-shrink: 0;
+
+  background: white;
+
+  border-radius: 50%;
+
+  font-size: 20px;
+
+  box-shadow: 0 1px 4px rgba(0, 0, 0, 0.08);
+}
+
+
+/* Alert content */
+
+.alert-content {
+  flex: 1;
+}
+
+.alert-content h3 {
+  font-size: 17px;
+
+  color: #1f2937;
+
+  margin-bottom: 6px;
+}
+
+.alert-content p {
+  font-size: 14px;
+
+  line-height: 1.5;
+
+  color: #53665a;
+
+  margin-bottom: 8px;
+}
+
+
+/* Alert label */
+
+.alert-time {
+  font-size: 12px;
+
+  font-weight: 600;
+
+  color: #6b7280;
+}
+
+
+/* =========================================================
+   ALERTS RESPONSIVE
+   ========================================================= */
+
+@media (max-width: 600px) {
+
+  .alerts-card {
+    padding: 16px;
+  }
+
+  .alerts-header {
+    align-items: flex-start;
+  }
+
+  .alerts-header h2 {
+    font-size: 22px;
+  }
+
+  .alert-item {
+    padding: 14px;
+
+    gap: 12px;
+  }
+
+  .alert-icon {
+    width: 36px;
+
+    height: 36px;
+
+    font-size: 18px;
+  }
+
+  .alert-content h3 {
+    font-size: 16px;
+  }
+
+  .alert-content p {
+    font-size: 13px;
+  }
+
+}
+/* =========================================================
+   MAIN NAVIGATION
+   ========================================================= */
+
+.main-navigation {
+  min-height: 68px;
+  padding: 12px 30px;
+
+  background: #ffffff;
+
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+
+  gap: 24px;
+
+  border-bottom: 1px solid #e5e7eb;
+
+  position: sticky;
+  top: 0;
+
+  z-index: 1000;
+}
+
+
+/* Brand */
+
+.nav-brand {
+  display: flex;
+  flex-direction: column;
+
+  min-width: 180px;
+}
+
+.nav-brand strong {
+  color: #163a24;
+
+  font-size: 20px;
+
+  line-height: 1.2;
+}
+
+.nav-brand span {
+  color: #6b7280;
+
+  font-size: 11px;
+
+  margin-top: 3px;
+}
+
+
+/* Navigation links */
+
+.nav-links {
+  display: flex;
+
+  align-items: center;
+
+  justify-content: center;
+
+  gap: 8px;
+
+  flex: 1;
+}
+
+.nav-links a {
+  text-decoration: none;
+
+  color: #53665a;
+
+  font-size: 14px;
+
+  font-weight: 600;
+
+  padding: 9px 13px;
+
+  border-radius: 7px;
+
+  transition:
+    background 0.2s ease,
+    color 0.2s ease;
+}
+
+.nav-links a:hover {
+  background: #f0f5f1;
+
+  color: #163a24;
+}
+
+
+/* Farm status */
+
+.nav-status {
+  display: flex;
+
+  align-items: center;
+
+  gap: 7px;
+
+  padding: 8px 12px;
+
+  background: #f0fdf4;
+
+  border: 1px solid #bbf7d0;
+
+  border-radius: 20px;
+
+  color: #166534;
+
+  font-size: 13px;
+
+  font-weight: 600;
+
+  white-space: nowrap;
+}
+
+.status-dot {
+  width: 8px;
+
+  height: 8px;
+
+  border-radius: 50%;
+
+  background: #22c55e;
+}
+
+
+/* =========================================================
+   NAVIGATION RESPONSIVE
+   ========================================================= */
+
+@media (max-width: 800px) {
+
+  .main-navigation {
+    padding: 12px 18px;
+
+    flex-wrap: wrap;
+
+    gap: 12px;
+  }
+
+  .nav-brand {
+    min-width: auto;
+  }
+
+  .nav-links {
+    order: 3;
+
+    flex-basis: 100%;
+
+    overflow-x: auto;
+
+    justify-content: flex-start;
+
+    padding-bottom: 3px;
+  }
+
+  .nav-status {
+    margin-left: auto;
+  }
+}
+
+
+@media (max-width: 500px) {
+
+  .main-navigation {
+    padding: 10px 14px;
+  }
+
+  .nav-brand strong {
+    font-size: 18px;
+  }
+
+  .nav-brand span {
+    display: none;
+  }
+
+  .nav-status {
+    font-size: 12px;
+
+    padding: 7px 9px;
+  }
+
+  .nav-links a {
+    font-size: 13px;
+
+    padding: 8px 10px;
+  }
+
+}
+/* ============================= */
+/* MOBILE RESPONSIVE FIX */
+/* ============================= */
+
+html,
+body,
+#root {
+  width: 100%;
+  max-width: 100%;
+  overflow-x: hidden;
+}
+
+.dashboard {
+  width: 100%;
+  min-width: 0;
+  overflow-x: hidden;
+}
+
+/* Header */
+.dashboard-header {
+  width: 100%;
+  padding: 20px;
+}
+
+.dashboard-header h1 {
+  font-size: 26px;
+}
+
+/* Main content */
+.dashboard-content {
+  width: 100%;
+  max-width: 100%;
+  padding: 16px;
+}
+
+/* Cards */
+.map-card,
+.farm-info-card,
+.crop-health-card,
+.trend-card,
+.status-card,
+.alerts-card {
+  width: 100%;
+  max-width: 100%;
+  min-width: 0;
+}
+
+/* Map */
+.map-container {
+  width: 100%;
+  max-width: 100%;
+  height: 420px;
+  overflow: hidden;
+}
+
+/* Farm information */
+.farm-info-grid {
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+}
+
+.crop-health-grid {
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+}
+
+.overview-grid {
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+}
+
+/* Prevent text from forcing cards wider */
+.info-item,
+.health-item,
+.monitor-item,
+.alert-item {
+  min-width: 0;
+  overflow-wrap: break-word;
+}
+
+/* Trend chart */
+.trend-card {
+  overflow: hidden;
+}
+
+.trend-chart {
+  width: 100%;
+  max-width: 100%;
+  overflow: hidden;
+}
+
+/* ============================= */
+/* SMALL PHONES */
+/* ============================= */
+
+@media (max-width: 600px) {
+
+  .dashboard-content {
+    padding: 12px;
+  }
+
+  .dashboard-header {
+    padding: 18px 16px;
+  }
+
+  .dashboard-header h1 {
+    font-size: 24px;
+  }
+
+  .dashboard-header p {
+    font-size: 14px;
+  }
+
+  .map-card,
+  .farm-info-card,
+  .crop-health-card,
+  .trend-card,
+  .status-card,
+  .alerts-card {
+    padding: 16px;
+    margin-top: 16px;
+  }
+
+  .map-container {
+    height: 360px;
+  }
+
+  .farm-info-grid,
+  .crop-health-grid,
+  .overview-grid {
+    grid-template-columns: 1fr;
+  }
+
+  .farm-info-card h2,
+  .crop-health-card h2,
+  .trend-card h2,
+  .status-card h2,
+  .alerts-card h2,
+  .map-card h2 {
+    font-size: 20px;
+  }
+
+  /* Keep Leaflet controls inside the map */
+  .leaflet-control {
+    max-width: calc(100% - 20px);
+  }
+
+  .heatmap-legend {
+    max-width: 150px;
+    font-size: 11px;
+  }
+
+  .heatmap-toggle button,
+  .center-farm-control button {
+    font-size: 12px;
+    padding: 7px 9px;
+  }
+
+  /* Navigation if present */
+  .dashboard-nav {
+    width: 100%;
+    overflow-x: auto;
+  }
+
+  .dashboard-nav ul {
+    width: max-content;
+    min-width: 100%;
+  }
+}
+
+/* ============================= */
+/* VERY SMALL PHONES */
+/* ============================= */
+
+@media (max-width: 400px) {
+
+  .dashboard-content {
+    padding: 10px;
+  }
+
+  .dashboard-header {
+    padding: 16px 12px;
+  }
+
+  .map-card,
+  .farm-info-card,
+  .crop-health-card,
+  .trend-card,
+  .status-card,
+  .alerts-card {
+    padding: 14px;
+  }
+
+  .map-container {
+    height: 330px;
+  }
+
+  .heatmap-legend {
+    max-width: 135px;
+    padding: 8px;
+  }
+
+  .heatmap-toggle button,
+  .center-farm-control button {
+    font-size: 11px;
+    padding: 6px 8px;
+  }
+}
+/* ================================
+   MOBILE RESPONSIVE FIX
+   ================================ */
+
+@media (max-width: 600px) {
+
+  .dashboard {
+    width: 100%;
+    overflow-x: hidden;
+  }
+
+  .dashboard-header {
+    padding: 20px 16px;
+  }
+
+  .dashboard-header h1 {
+    font-size: 24px;
+  }
+
+  .dashboard-header p {
+    font-size: 14px;
+  }
+
+  .dashboard-content {
+    width: 100%;
+    padding: 16px;
+  }
+
+  .map-card,
+  .farm-info-card,
+  .crop-health-card,
+  .trend-card,
+  .status-card,
+  .alerts-card {
+    width: 100%;
+    padding: 16px;
+    margin-left: 0;
+    margin-right: 0;
+  }
+
+  .map-container {
+    width: 100%;
+    height: 400px;
+  }
+
+  .farm-map {
+    width: 100%;
+    height: 100%;
+  }
+
+  .farm-info-grid,
+  .crop-health-grid,
+  .status-grid {
+    grid-template-columns: 1fr;
+    width: 100%;
+  }
+
+  .overview-grid {
+    grid-template-columns: 1fr;
+  }
+
+  .trend-card {
+    overflow: hidden;
+  }
+
+  .trend-chart {
+    width: 100%;
+    overflow-x: auto;
+  }
+
+  .alerts-list {
+    width: 100%;
+  }
+
+  .alert-item {
+    width: 100%;
+  }
+}
+/* =========================================
+   MOBILE RESPONSIVE DESIGN
+   ========================================= */
+
+html,
+body,
+#root {
+  width: 100%;
+  max-width: 100%;
+  overflow-x: hidden;
+}
+
+/* Prevent dashboard from becoming wider than screen */
+.dashboard {
+  width: 100%;
+  max-width: 100%;
+  overflow-x: hidden;
+}
+
+/* Header */
+.dashboard-header {
+  width: 100%;
+  padding: 20px;
+}
+
+.dashboard-header h1 {
+  font-size: 26px;
+}
+
+.dashboard-header p {
+  font-size: 14px;
+}
+
+/* Main content */
+.dashboard-content {
+  width: 100%;
+  padding: 16px;
+}
+
+/* Cards */
+.map-card,
+.farm-info-card,
+.crop-health-card,
+.trend-card,
+.status-card,
+.alerts-card {
+  width: 100%;
+  max-width: 100%;
+  padding: 18px;
+  margin-top: 18px;
+}
+
+/* Map */
+.map-container {
+  width: 100%;
+  height: 400px;
+}
+
+.farm-map {
+  width: 100%;
+  height: 100%;
+}
+
+/* Farm information */
+.farm-info-grid {
+  grid-template-columns: 1fr;
+  gap: 12px;
+}
+
+.info-item {
+  padding: 16px;
+}
+
+/* Crop health */
+.crop-health-grid {
+  grid-template-columns: 1fr;
+  gap: 12px;
+}
+
+.health-item {
+  padding: 16px;
+}
+
+/* Trend section */
+.trend-card {
+  overflow: hidden;
+}
+
+.trend-header {
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+  align-items: flex-start;
+}
+
+.trend-current {
+  width: 100%;
+}
+
+/* Chart */
+.trend-chart {
+  width: 100%;
+  overflow-x: auto;
+}
+
+.chart-area {
+  min-width: 500px;
+}
+
+/* Farm monitoring */
+.status-grid {
+  grid-template-columns: 1fr;
+  gap: 12px;
+}
+
+.monitor-item {
+  width: 100%;
+}
+
+/* Alerts */
+.alerts-header {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+  align-items: flex-start;
+}
+
+.alert-count {
+  align-self: flex-start;
+}
+
+.alert-item {
+  width: 100%;
+}
+
+/* Map controls */
+.center-farm-control {
+  margin-top: 10px;
+}
+
+.heatmap-toggle {
+  margin-top: 10px;
+}
+
+/* Very small phones */
+@media (max-width: 480px) {
+
+  .dashboard-content {
+    padding: 10px;
+  }
+
+  .dashboard-header {
+    padding: 18px 16px;
+  }
+
+  .dashboard-header h1 {
+    font-size: 23px;
+  }
+
+  .dashboard-header p {
+    font-size: 13px;
+  }
+
+  .map-card,
+  .farm-info-card,
+  .crop-health-card,
+  .trend-card,
+  .status-card,
+  .alerts-card {
+    padding: 14px;
+  }
+
+  .map-container {
+    height: 350px;
+  }
+
+  .map-card h2,
+  .farm-info-card h2,
+  .crop-health-card h2,
+  .trend-card h2,
+  .status-card h2,
+  .alerts-card h2 {
+    font-size: 20px;
+  }
+}
+/* =========================================
+   LOGIN PAGE
+   ========================================= */
+
+.login-page {
+  min-height: 100vh;
+  width: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 30px;
+  background: #f4f7f4;
+}
+
+.login-card {
+  width: 100%;
+  max-width: 440px;
+  background: white;
+  border-radius: 16px;
+  padding: 36px;
+  box-shadow: 0 8px 30px rgba(0, 0, 0, 0.1);
+}
+
+.login-header {
+  text-align: center;
+  margin-bottom: 32px;
+}
+
+.login-header h1 {
+  color: #163a24;
+  font-size: 30px;
+  margin-bottom: 6px;
+}
+
+.login-header p {
+  color: #53665a;
+  font-size: 14px;
+}
+
+.login-title {
+  margin-bottom: 24px;
+}
+
+.login-title h2 {
+  color: #1f2937;
+  font-size: 24px;
+  margin-bottom: 6px;
+}
+
+.login-title p {
+  color: #53665a;
+  font-size: 14px;
+}
+
+.login-form {
+  display: flex;
+  flex-direction: column;
+  gap: 18px;
+}
+
+.form-group {
+  display: flex;
+  flex-direction: column;
+  gap: 7px;
+}
+
+.form-group label {
+  font-size: 14px;
+  font-weight: 600;
+  color: #1f2937;
+}
+
+.form-group input {
+  width: 100%;
+  padding: 12px 14px;
+  border: 1px solid #d1d5db;
+  border-radius: 8px;
+  font-size: 15px;
+  outline: none;
+  transition: border-color 0.2s, box-shadow 0.2s;
+}
+
+.form-group input:focus {
+  border-color: #2e7d32;
+  box-shadow: 0 0 0 3px rgba(46, 125, 50, 0.12);
+}
+
+.login-options {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 10px;
+  font-size: 13px;
+}
+
+.remember-me {
+  display: flex;
+  align-items: center;
+  gap: 7px;
+  color: #53665a;
+}
+
+.remember-me input {
+  accent-color: #2e7d32;
+}
+
+.forgot-password {
+  border: none;
+  background: none;
+  color: #2e7d32;
+  font-size: 13px;
+  cursor: pointer;
+}
+
+.forgot-password:hover {
+  text-decoration: underline;
+}
+
+.login-button {
+  width: 100%;
+  padding: 13px;
+  border: none;
+  border-radius: 8px;
+  background: #163a24;
+  color: white;
+  font-size: 16px;
+  font-weight: 600;
+  cursor: pointer;
+  transition: background 0.2s, transform 0.1s;
+}
+
+.login-button:hover {
+  background: #245b38;
+}
+
+.login-button:active {
+  transform: translateY(1px);
+}
+
+.login-footer {
+  text-align: center;
+  margin-top: 24px;
+  color: #6b7280;
+  font-size: 12px;
+}
+
+/* Login mobile layout */
+
+@media (max-width: 600px) {
+  .login-page {
+    padding: 18px;
+  }
+
+  .login-card {
+    padding: 26px 20px;
+  }
+
+  .login-header h1 {
+    font-size: 26px;
+  }
+
+  .login-title h2 {
+    font-size: 22px;
+  }
+
+  .login-options {
+    align-items: flex-start;
+  }
+}
+/* =========================================
+   DASHBOARD HEADER + LOGOUT
+   ========================================= */
+
+.dashboard-header-content {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 20px;
+}
+
+.logout-button {
+  border: 1px solid rgba(255, 255, 255, 0.35);
+  background: transparent;
+  color: white;
+  padding: 9px 18px;
+  border-radius: 7px;
+  font-size: 14px;
+  font-weight: 600;
+  cursor: pointer;
+  transition: background 0.2s, border-color 0.2s;
+}
+
+.logout-button:hover {
+  background: rgba(255, 255, 255, 0.12);
+  border-color: rgba(255, 255, 255, 0.6);
+}
+
+@media (max-width: 600px) {
+  .dashboard-header-content {
+    align-items: flex-start;
+  }
+
+  .logout-button {
+    padding: 8px 13px;
+    font-size: 13px;
+  }
+}
+/* =========================================
+   DASHBOARD NAVIGATION
+   ========================================= */
+
+.dashboard-nav {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  margin-top: 20px;
+  padding-top: 16px;
+  border-top: 1px solid rgba(255, 255, 255, 0.18);
+  overflow-x: auto;
+  scrollbar-width: none;
+}
+
+.dashboard-nav::-webkit-scrollbar {
+  display: none;
+}
+
+.dashboard-nav button {
+  flex-shrink: 0;
+  border: 1px solid rgba(255, 255, 255, 0.3);
+  background: rgba(255, 255, 255, 0.08);
+  color: white;
+  padding: 9px 15px;
+  border-radius: 7px;
+  font-size: 13px;
+  font-weight: 600;
+  cursor: pointer;
+  transition: background 0.2s, border-color 0.2s;
+}
+
+.dashboard-nav button:hover {
+  background: rgba(255, 255, 255, 0.18);
+  border-color: rgba(255, 255, 255, 0.55);
+}
+
+/* Keep navigation usable on mobile */
+
+@media (max-width: 600px) {
+  .dashboard-nav {
+    gap: 8px;
+    margin-top: 16px;
+  }
+
+  .dashboard-nav button {
+    padding: 8px 12px;
+    font-size: 12px;
+  }
+}
+/* =========================================================
+   CROP IMAGE PREDICTION - PROFESSIONAL UPLOAD
+   ========================================================= */
+
+.prediction-upload-area {
+  width: 100%;
+  min-height: 260px;
+  box-sizing: border-box;
+  padding: 40px 30px;
+  border: 1px dashed #cbd5e1;
+  border-radius: 16px;
+  background: #ffffff;
+
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+
+  text-align: center;
+  transition: border-color 0.2s ease, background 0.2s ease;
+}
+
+.prediction-upload-area:hover {
+  border-color: #94a3b8;
+  background: #fafafa;
+}
+
+/* Upload icon */
+
+.prediction-upload-icon {
+  width: 56px;
+  height: 56px;
+  margin-bottom: 20px;
+
+  border-radius: 14px;
+  background: #f1f5f9;
+  color: #334155;
+
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  font-size: 28px;
+  font-weight: 400;
+}
+
+.prediction-upload-icon span {
+  display: block;
+  line-height: 1;
+  transform: translateY(-2px);
+}
+
+/* Text */
+
+.prediction-upload-content h3 {
+  margin: 0;
+
+  color: #111827;
+  font-size: 18px;
+  font-weight: 650;
+  line-height: 1.4;
+}
+
+.prediction-upload-content p {
+  margin: 8px 0 6px;
+
+  color: #64748b;
+  font-size: 14px;
+  line-height: 1.5;
+}
+
+.prediction-upload-supported {
+  display: block;
+
+  color: #94a3b8;
+  font-size: 12px;
+  line-height: 1.5;
+}
+
+/* Browse button */
+
+.prediction-browse-button {
+  margin-top: 22px;
+
+  padding: 11px 22px;
+
+  border: 1px solid #1f2937;
+  border-radius: 8px;
+
+  background: #1f2937;
+  color: #ffffff;
+
+  font-size: 14px;
+  font-weight: 600;
+
+  line-height: 1;
+  cursor: pointer;
+
+  transition:
+    background 0.2s ease,
+    border-color 0.2s ease,
+    transform 0.15s ease;
+}
+
+.prediction-browse-button:hover {
+  background: #111827;
+  border-color: #111827;
+  transform: translateY(-1px);
+}
+
+.prediction-browse-button:active {
+  transform: translateY(0);
+}
+
+
+/* =========================================================
+   SELECTED FILE
+   ========================================================= */
+
+.prediction-preview-section {
+  width: 100%;
+  box-sizing: border-box;
+
+  border: 1px solid #e5e7eb;
+  border-radius: 16px;
+
+  background: #ffffff;
+  overflow: hidden;
+}
+
+.prediction-preview-section .prediction-preview {
+  min-height: 180px;
+
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  background: #fafafa;
+  border-bottom: 1px solid #e5e7eb;
+}
+
+.prediction-preview-section .prediction-file {
+  min-height: 72px;
+  padding: 14px 18px;
+
+  display: flex;
+  align-items: center;
+  gap: 14px;
+}
+
+.prediction-preview-section .prediction-file-icon {
+  width: 46px;
+  height: 46px;
+  flex-shrink: 0;
+
+  border-radius: 10px;
+
+  background: #f1f5f9;
+  color: #334155;
+
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  font-size: 11px;
+  font-weight: 700;
+}
+
+.prediction-preview-section .prediction-file-info {
+  flex: 1;
+  min-width: 0;
+
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+}
+
+.prediction-preview-section .prediction-file-info strong {
+  color: #111827;
+  font-size: 14px;
+
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.prediction-preview-section .prediction-file-info span {
+  color: #94a3b8;
+  font-size: 12px;
+}
+
+.prediction-preview-section .prediction-remove {
+  border: none;
+  background: transparent;
+
+  color: #64748b;
+
+  font-size: 13px;
+  font-weight: 600;
+
+  cursor: pointer;
+
+  padding: 7px 9px;
+  border-radius: 6px;
+
+  transition:
+    color 0.2s ease,
+    background 0.2s ease;
+}
+
+.prediction-preview-section .prediction-remove:hover {
+  color: #dc2626;
+  background: #fef2f2;
+}
+
+.prediction-preview-section .prediction-remove:disabled {
+  opacity: 0.5;
+  cursor: not-allowed;
+}
+/* ===== Responsive Page Fix ===== */
+
+html,
+body,
+#root {
+  width: 100%;
+  min-width: 0;
+  max-width: 100%;
+  margin: 0;
+  padding: 0;
+  overflow-x: hidden;
+}
+
+* {
+  box-sizing: border-box;
+}
+
+body {
+  overflow-x: hidden;
+}
+
+#root {
+  width: 100%;
+  min-height: 100vh;
+}
+
+/* Prevent dashboard content from becoming wider than screen */
+.dashboard,
+.dashboard-container,
+.main-content,
+.page-content {
+  width: 100%;
+  max-width: 100%;
+  min-width: 0;
+}
+
+/* Make header fit the screen */
+header,
+.navbar,
+.topbar {
+  max-width: 100%;
+  width: 100%;
+  box-sizing: border-box;
+}
+
+/* Prevent buttons from pushing outside */
+button {
+  max-width: 100%;
+}
+
+/* Map should stay inside its container */
+.map-container,
+.farm-map-wrapper {
+  width: 100%;
+  max-width: 100%;
+  min-width: 0;
+  box-sizing: border-box;
+}
+
+/* Leaflet map */
+.farm-map {
+  width: 100%;
+  max-width: 100%;
+}
