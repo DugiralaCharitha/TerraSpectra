@@ -1,0 +1,70 @@
+{
+  "type": "FeatureCollection",
+  "name": "TerraSpectra_5Acre_FungalBlight_Hotspot",
+  "crs": {
+    "type": "name",
+    "properties": {
+      "name": "urn:ogc:def:crs:OGC:1.3:CRS84"
+    }
+  },
+  "metadata": {
+    "target_disease": "Fungal Blight (Fusarium head blight / Septoria tritici)",
+    "detection_method": "3D-CNN + ViT Hyperspectral Chlorophyll Red-Edge Shift",
+    "lead_time_days": 21,
+    "lead_time_description": "Predicted 3 weeks prior to macroscopic foliar chlorosis",
+    "affected_parcel": "Parcel C (Northeast Field)",
+    "total_at_risk_acres": 5.2,
+    "severity_index": 0.89,
+    "confidence_score": 0.942
+  },
+  "features": [
+    {
+      "type": "Feature",
+      "id": "hotspot_primary_5acre",
+      "properties": {
+        "zone_name": "Parcel C - Zone Alpha (Fungal Blight Infiltration)",
+        "area_acres": 5.2,
+        "severity": "CRITICAL",
+        "predicted_symptom_onset_date": "2026-09-23",
+        "current_symptom_status": "Sub-Visual Chemical Anomaly (Invisible to Naked Eye / RGB)",
+        "chlorophyll_absorption_dip": "-28.4% at 705nm",
+        "photochemical_reflectance_index": -0.142,
+        "carotenoid_stress_ratio": "+34.1%",
+        "canopy_water_index": -0.188,
+        "recommended_action": "Targeted precision bio-fungicide application within 48-72 hours",
+        "pesticide_savings_vs_blanket_spray": "94.8% chemical reduction (5.2 acres vs 1000 acres)",
+        "color": "#ef4444",
+        "fill_opacity": 0.45,
+        "stroke_color": "#dc2626",
+        "stroke_width": 2.5
+      },
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [76.61110, 20.75355],
+            [76.61110, 20.75485],
+            [76.61250, 20.75485],
+            [76.61250, 20.75355],
+            [76.61110, 20.75355]
+          ]
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "id": "hotspot_core_epicenter",
+      "properties": {
+        "name": "Outbreak Epicenter Cell",
+        "latitude": 20.75420,
+        "longitude": 76.61180,
+        "spore_density_risk": "High",
+        "elevation_meters": 312.4
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [76.61180, 20.75420]
+      }
+    }
+  ]
+}
