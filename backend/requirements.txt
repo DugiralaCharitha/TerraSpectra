@@ -1,0 +1,7 @@
+fastapi==0.141.1
+uvicorn==0.52.1
+SQLAlchemy==2.0.52
+numpy==2.5.2
+scikit-learn==1.9.0
+joblib==1.6.0
+torch==2.14.0
